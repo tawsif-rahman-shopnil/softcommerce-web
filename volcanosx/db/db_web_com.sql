@@ -1,7 +1,3 @@
--- Create a database for your project
-CREATE DATABASE IF NOT EXISTS dbcom;
-USE dbcom;
-
 -- Table to store user information
 CREATE TABLE users (
     id INT AUTO_INCREMENT PRIMARY KEY,
