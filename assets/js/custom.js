@@ -2,13 +2,6 @@
 	
 	"use strict";
 
-	// Page loading animation
-	$(window).on('load', function() {
-
-        $('#js-preloader').addClass('loaded');
-
-    });
-
 	// WOW JS
 	$(window).on ('load', function (){
         if ($(".wow").length) { 
