@@ -18,6 +18,9 @@ CREATE TABLE admins (
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
+INSERT INTO `admins` (`id`, `username`, `email`, `password`) VALUES
+(1, 'admin','admin@example.com', MD5('admin'));
+
 -- Table to store the relationship between admin users and regular users
 CREATE TABLE admin_user_relationship (
     id INT AUTO_INCREMENT PRIMARY KEY,

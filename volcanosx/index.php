@@ -18,58 +18,89 @@
 		<link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
 
     </head>
-
     <body class="loading authentication-bg authentication-bg-pattern">
 
-        <div class="account-pages my-5">
-            <div class="container">
+<div class="account-pages my-5">
+    <div class="container">
 
-                <div class="row justify-content-center">
-                    <div class="col-md-8 col-lg-6 col-xl-4">
-                        <div class="text-center">   
-                            <a href="index.html">
-                                <img src="assets/images/ " alt="" height="22" class="mx-auto">
-                            </a>
-                            <p class="text-muted mt-2 mb-4">Admin Login</p>
-
-                        </div>
-                        <div class="card">
-                            <div class="card-body p-4">
-
-                                <form action="#">
-                                    <div class="mb-3">
-                                        <label for="emailaddress" class="form-label">Username</label>
-                                        <input class="form-control" type="email" id="emailaddress" required="" placeholder="Enter your username">
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <label for="password" class="form-label">Password</label>
-                                        <input class="form-control" type="password" required="" id="password" placeholder="Enter your password">
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <div class="form-check">
-                                            <input type="checkbox" class="form-check-input" id="checkbox-signin" checked>
-                                            <label class="form-check-label" for="checkbox-signin">Remember me</label>
-                                        </div>
-                                    </div>
-
-                                    <div class="mb-3 d-grid text-center">
-                                        <button class="btn btn-primary" type="submit"> Log In </button>
-                                    </div>
-                                </form>
-
-                            </div> <!-- end card-body -->
-                        </div>
-                        <!-- end card -->
-
-                    </div> <!-- end col -->
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-6 col-xl-4">
+                <div class="text-center">
+                    <a href="index.html">
+                        <!-- Replace the src attribute with your logo image path -->
+                        <img src="assets/images/your_logo.png" alt="Logo" height="22" class="mx-auto">
+                    </a>
+                    <p class="text-muted mt-2 mb-4">Admin Login</p>
                 </div>
-                <!-- end row -->
-            </div>
-            <!-- end container -->
+                <div class="card">
+                    <div class="card-body p-4">
+
+                        <?php
+                        include('dbcon.php'); // Include the file that handles database connection
+                        session_start();
+                        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                            $username = $_POST['username'];
+                            $password = $_POST['password'];
+                        
+                            // Perform SQL query to check if the user exists
+                            $stmt = $conn->prepare("SELECT * FROM admins WHERE username = ?");
+                            $stmt->bind_param('s', $username);
+                            $stmt->execute();
+                            $result = $stmt->get_result();
+                            $user = $result->fetch_assoc();
+                        
+                            if ($user) {
+                        
+                                // Valid login, set session variables and redirect to dashboard
+                                $_SESSION['user_id'] = $user['id'];
+                                $_SESSION['username'] = $user['username'];
+                                header("Location: dashboard.php"); // Redirect to the dashboard page
+                                exit();
+                            } else {
+                                // Debugging line: Output that the user doesn't exist
+                                echo "User not found";
+                        
+                                // Invalid login, show an error message
+                                $error_message = "Invalid username or password.";
+                            }
+                        }
+                        
+                        ?>
+
+                        <form action="#" method="POST">
+                            <div class="mb-3">
+                                <label for="username" class="form-label">Username</label>
+                                <input class="form-control" type="text" id="username" name="username" required="" placeholder="Enter your username">
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="password" class="form-label">Password</label>
+                                <input class="form-control" type="password" required="" id="password" name="password" placeholder="Enter your password">
+                            </div>
+
+                            <div class="mb-3 d-grid text-center">
+                                <button class="btn btn-primary" type="submit">Log In</button>
+                            </div>
+                        </form>
+
+                        <?php
+                        if (isset($error_message)) {
+                            echo '<p class="text-danger">' . $error_message . '</p>';
+                        }
+                        ?>
+
+                    </div> <!-- end card-body -->
+                </div>
+                <!-- end card -->
+
+            </div> <!-- end col -->
         </div>
-        <!-- end page -->
+        <!-- end row -->
+    </div>
+    <!-- end container -->
+</div>
+<!-- end page -->
+
 
         <!-- Vendor -->
         <script src="assets/libs/jquery/jquery.min.js"></script>
