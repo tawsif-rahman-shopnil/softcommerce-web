@@ -50,7 +50,7 @@
                             $user = $result->fetch_assoc();
                         
                             if ($user) {
-                        
+         
                                 // Valid login, set session variables and redirect to dashboard
                                 $_SESSION['user_id'] = $user['id'];
                                 $_SESSION['username'] = $user['username'];
