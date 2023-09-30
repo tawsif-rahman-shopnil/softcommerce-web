@@ -249,7 +249,7 @@
                     <div class="row">
                       <div class="col-lg-12">
                         <div class="heading-section">
-                          <h4> Most Downloaded Products </h4>
+                          <h4> Most Downloaded Games </h4>
                         </div>
                         <div class="row">
                           <div class="col-lg-3 col-sm-6">

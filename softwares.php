@@ -76,7 +76,7 @@
             <div class="col-lg-8">
               <div class="featured-games header-text">
                 <div class="heading-section">
-                  <h4><em>Featured</em> Games</h4>
+                  <h4><em>Featured</em> Softwares</h4>
                 </div>
                 <div class="owl-features owl-carousel">
                   <div class="item">
@@ -249,7 +249,7 @@
                     <div class="row">
                       <div class="col-lg-12">
                         <div class="heading-section">
-                          <h4> Most Downloaded Products </h4>
+                          <h4> Most Downloaded Softwares </h4>
                         </div>
                         <div class="row">
                           <div class="col-lg-3 col-sm-6">
