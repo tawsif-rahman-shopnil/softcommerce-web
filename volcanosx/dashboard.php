@@ -3,7 +3,7 @@
     <head>
 
         <meta charset="utf-8" />
-        <title>Dashboard | Adminto - Responsive Admin Dashboard Template</title>
+        <title>Dashboard</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
         <meta content="Coderthemes" name="author" />
@@ -70,27 +70,7 @@
                                         </div>
 
                                         <div class="notification-list">
-                                            <!-- item-->
-                                            <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                                <div class="d-flex align-items-start">
-                                                    <img class="d-flex me-2 rounded-circle" src="assets/images/users/user-2.jpg" alt="Generic placeholder image" height="32">
-                                                    <div class="w-100">
-                                                        <h5 class="m-0 font-14">Erwin E. Brown</h5>
-                                                        <span class="font-12 mb-0">UI Designer</span>
-                                                    </div>
-                                                </div>
-                                            </a>
 
-                                            <!-- item-->
-                                            <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                                <div class="d-flex align-items-start">
-                                                    <img class="d-flex me-2 rounded-circle" src="assets/images/users/user-5.jpg" alt="Generic placeholder image" height="32">
-                                                    <div class="w-100">
-                                                        <h5 class="m-0 font-14">Jacob Deo</h5>
-                                                        <span class="font-12 mb-0">Developer</span>
-                                                    </div>
-                                                </div>
-                                            </a>
                                         </div>
             
                                     </div> 
@@ -246,14 +226,6 @@
     
                     <!-- LOGO -->
                     <div class="logo-box">
-                        <a href="index.html" class="logo logo-light text-center">
-                            <span class="logo-sm">
-                                <img src="assets/images/logo-sm.png" alt="" height="22">
-                            </span>
-                            <span class="logo-lg">
-                                <img src="assets/images/logo-light.png" alt="" height="16">
-                            </span>
-                        </a>
                         <a href="index.html" class="logo logo-dark text-center">
                             <span class="logo-sm">
                                 <img src="assets/images/logo-sm.png" alt="" height="22">

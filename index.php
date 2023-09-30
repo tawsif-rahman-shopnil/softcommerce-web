@@ -32,8 +32,8 @@
             <div class="col-12">
                 <nav class="main-nav">
                     <!-- ***** Logo Start ***** -->
-                    <a href="index.html" class="logo">
-                        <img src="assets/images/ " alt="">
+                    <a href="index.php" class="logo">
+                        <img src="assets/images/logo.png " alt="">
                     </a>
                     <!-- ***** Logo End ***** -->
                     <!-- ***** Search End ***** -->
@@ -46,12 +46,13 @@
                     <!-- ***** Search End ***** -->
                     <!-- ***** Menu Start ***** -->
                     <ul class="nav">
-                        <li><a href="index.html" class="active">Home</a></li>
-                        <li><a href="browse.html">Collections</a></li>
-                        <li><a href="details.html">Games</a></li>
-                        <li><a href="streams.html">Softwares</a></li>
+                        <li><a href="index.php" class="active">Home</a></li>
+                        <li><a href="games.php">Games</a></li>
+                        <li><a href="softwares.php">Softwares</a></li>
+                        <li><a href="about.php">About</a></li>
+                        <li><a href="contact.php">Contact</a></li>
                         <div class="main-button">
-                          <a href="profile.html">Login/Sign-up</a>
+                          <a href="custauth.php">Login/Sign-up</a>
                         </div>
                     </ul>   
                     <a class='menu-trigger'>
@@ -78,7 +79,8 @@
                   <h6>Welcome To our Shop</h6>
                   <h4><em>Buy</em> Our Popular Games/Apps Here</h4>
                   <div class="main-button">
-                    <a href="browse.html">Browse Now</a>
+                    <a href="browse.html">Games</a>
+                    <a href="browse.html">Softwares</a>
                   </div>
                 </div>
               </div>
