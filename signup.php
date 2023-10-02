@@ -8,7 +8,7 @@
 
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-    <title> Crednik | Terms of Services </title>
+    <title> Crednik </title>
 
     <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -19,18 +19,8 @@
     <link rel="stylesheet" href="assets/css/templatemo-cyborg-gaming.css">
     <link rel="stylesheet" href="assets/css/owl.css">
     <link rel="stylesheet" href="assets/css/animate.css">
-    <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
-    <style>
-      .terms-of-service h2 {
-        font-size: 32px; /* Adjust the size as needed */
-        text-align: center;
-        margin-bottom: 20px;
-      }
-
-      .terms-of-service p {
-        font-size: 18px; /* Smaller font size for paragraphs */
-      }
-    </style>
+    <link rel="stylesheet"href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
+ 
   </head>
 
 <body>
@@ -56,7 +46,7 @@
                     <!-- ***** Search End ***** -->
                     <!-- ***** Menu Start ***** -->
                     <ul class="nav">
-                        <li><a href="index.php" class="active">Home</a></li>
+                        <li><a href="index.php">Home</a></li>
                         <li><a href="games.php">Games</a></li>
                         <li><a href="softwares.php">Softwares</a></li>
                         <li><a href="about.php">About</a></li>
@@ -76,38 +66,67 @@
   </header>
   <!-- ***** Header Area End ***** -->
 
-
-<!-- ***** Terms of Service Section Start ***** -->
-<section class="terms-of-service">
   <div class="container">
     <div class="row">
       <div class="col-lg-12">
-        <div class="section-heading">
-          <h2>Terms of Service</h2>
-          <div class="line"></div>
+        <div class="page-content">
+
+          <!-- ***** Buttons Area Start ***** -->
+          <div class="auth-container">    
+        <div class="button">
+            <form method="POST" action="">
+                <label for="username">Username:</label>
+                <input type="text" name="username" id="username" required><br>
+
+                <label for="name">Name:</label>
+                <input type="text" name="name" id="name" required><br>
+
+                <label for="email">Email:</label>
+                <input type="email" name="email" id="email" required><br>
+
+                <label for="password">Password:</label>
+                <input type="password" name="password" id="password" required><br>
+
+                <input type="submit" name="submit" value="Sign-up">
+            </form>
         </div>
-        <div class="content">
-          <h2>1. Acceptance of Terms</h2>
-          <p>By accessing or using the Crednik website (www.crednik.com), you agree to comply with and be bound by these Terms of Service. If you do not agree with these terms, please do not use our services.</p>
-
-          <h2>2. License</h2>
-          <p>Crednik grants you a limited, non-exclusive, non-transferable license to use the software and digital products purchased through our website for personal and non-commercial use.</p>
-
-          <h2>3. Payment and Pricing</h2>
-          <p>All prices are listed in USD. Payments are securely processed through trusted payment providers. Pricing and availability of products may change without notice.</p>
-
-          <h2>4. Delivery of Digital Products</h2>
-          <p>Upon successful payment, you will receive a download link and activation instructions for your purchased software or game.</p>
-
-          <h2>5. User Responsibilities</h2>
-          <p>Users are responsible for maintaining the security of their accounts and passwords. Unauthorized use of your account should be reported immediately.</p>
-        </div>
-      </div>
     </div>
-  </div>
-</section>
-<!-- ***** Terms of Service Section End ***** -->
 
+    <?php
+    // Include the database connection file
+    include 'volcanosx/dbcon.php';
 
+    if (isset($_POST["submit"])) {
+        // Retrieve form data
+        $username = $_POST['username'];
+        $name = $_POST['name'];
+        $email = $_POST['email'];
+        $password = password_hash($_POST['password'], PASSWORD_DEFAULT); // Hash the password for security
 
-<?php require 'footer.php'; ?>
+        // SQL query to insert data into the database
+        $sql = "INSERT INTO users (username, name, email, password) VALUES (?, ?, ?, ?)";
+
+        // Prepare the SQL statement
+        $stmt = $pdo->prepare($sql);
+
+        if ($stmt) {
+            // Bind parameters
+            $stmt->bindParam(1, $username);
+            $stmt->bindParam(2, $name);
+            $stmt->bindParam(3, $email);
+            $stmt->bindParam(4, $password);
+
+            // Execute the prepared statement
+            if ($stmt->execute()) {
+                echo "Registration successful. You can now log in.";
+            } else {
+                echo "Error: Registration failed.";
+            }
+        } else {
+            echo "Error: Unable to prepare the SQL statement.";
+        }
+    }
+    ?>
+        <!-- ***** Buttons Area End ***** -->
+
+  <?php require 'footer.php'; ?>
