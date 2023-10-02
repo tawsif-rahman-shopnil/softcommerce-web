@@ -335,7 +335,7 @@ Header Style
 */
 
 .background-header {
-  background-color: #fff !important;
+  background-color: #1F2122 !important;
   height: 70px!important;
   position: fixed!important;
   top: 0!important;
@@ -461,7 +461,7 @@ Header Style
 }
 
 .header-area .main-nav .nav li:last-child a {
-  background-color: #27292a;
+  background-color: #666;
   padding: 8px 10px 8px 20px;
   border-radius: 23px;
 }
@@ -484,13 +484,13 @@ Header Style
 
 .header-area .main-nav .nav li:last-child:hover a,
 .header-area .main-nav .nav li:last-child a.active {
-  color: #fff !important;
+  color: #666 !important;
   background-color: #e75e8d !important;
 }
 
 .background-header .main-nav .nav li:hover a,
 .background-header .main-nav .nav li a.active {
-  color: #fff;
+  color: #666;
   opacity: 1;
 }
 
@@ -619,7 +619,7 @@ Header Style
 }
 
 .header-area.header-sticky .nav li a.active {
-  color: #fff;
+  color: #1F2122;
 }
 
 @media (max-width: 1200px) {
@@ -669,7 +669,7 @@ Header Style
     width: 100%;
   }
   .header-area {
-    background-color: #f7f7f7;
+    background-color: #1F2122;
     padding: 0px 15px;
     height: 80px;
     box-shadow: none;
@@ -705,12 +705,12 @@ Header Style
     margin-top: 70px !important;
   }
   .header-area .main-nav .nav li:first-child {
-    border-top: 1px solid #eee;
+    border-top: 1px solid #1F2122;
   }
   .header-area .main-nav .nav li {
     width: 100%;
-    background: #fff;
-    border-bottom: 1px solid #eee;
+    background: #1F2122;
+    border-bottom: 1px solid #1F2122;
     padding-left: 0px !important;
     padding-right: 0px !important;
   }
@@ -719,11 +719,11 @@ Header Style
     line-height: 50px !important;
     padding: 0px !important;
     border: none !important;
-    background: #fff !important;
+    background: #1F2122 !important;
     color: #1e1e1e !important;
   }
   .header-area .main-nav .nav li a:hover {
-    background: #fff !important;
+    background: #1F2122 !important;
     color: #e75e8d!important;
   }
   .header-area .main-nav .nav li:last-child a img {

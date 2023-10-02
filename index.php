@@ -79,8 +79,8 @@
                   <h6>Welcome To our Shop</h6>
                   <h4><em>Buy</em> Our Popular Games/Apps Here</h4>
                   <div class="main-button">
-                    <a href="browse.html">Games</a>
-                    <a href="browse.html">Softwares</a>
+                  <a href="softwares.php">Softwares</a>
+                  <a href="games.php">Games</a>
                   </div>
                 </div>
               </div>

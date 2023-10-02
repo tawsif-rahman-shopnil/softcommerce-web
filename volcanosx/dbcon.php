@@ -4,6 +4,11 @@ $username = "root";
 $password = "";
 $database = "db_web_com";
 
+//$host = "localhost";
+//$username = "74w51f";
+//$password = "Account*566#";
+//$database = "db_web_com";
+
 try {
     $pdo = new PDO("mysql:host=$host;dbname=$database;charset=utf8", $username, $password);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
