@@ -1,4 +1,4 @@
--- Table to store user information
+-- Create tables with no foreign keys first
 CREATE TABLE users (
     id INT AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(50) NOT NULL,
@@ -9,7 +9,6 @@ CREATE TABLE users (
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
--- Table to store admin users
 CREATE TABLE admins (
     id INT AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(50) NOT NULL,
@@ -19,10 +18,41 @@ CREATE TABLE admins (
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
-INSERT INTO `admins` (`id`, `username`, `email`, `password`) VALUES
-(1, 'admin','admin@example.com', MD5('admin'));
+CREATE TABLE categories (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    description TEXT
+);
 
--- Table to store the relationship between admin users and regular users
+CREATE TABLE products (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    description TEXT,
+    price DECIMAL(10, 2) NOT NULL,
+    thumb VARCHAR(255),
+    det_img1 VARCHAR(255),
+    det_img2 VARCHAR(255),
+    det_img3 VARCHAR(255),
+    feat_img VARCHAR(255),
+    category_id INT,
+    `is_feat` ENUM('Y','N','N/A') NOT NULL DEFAULT 'N/A',
+    total_downloads INT DEFAULT 0,
+    average_rating DECIMAL(3, 2) DEFAULT 0.00,
+    num_reviews INT DEFAULT 0,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (category_id) REFERENCES categories(id)
+);
+
+-- Then create tables with foreign keys
+CREATE TABLE user_products (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    product_id INT NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES users(id),
+    FOREIGN KEY (product_id) REFERENCES products(id)
+);
+
 CREATE TABLE admin_user_relationship (
     id INT AUTO_INCREMENT PRIMARY KEY,
     admin_id INT NOT NULL,
@@ -33,27 +63,18 @@ CREATE TABLE admin_user_relationship (
     FOREIGN KEY (user_id) REFERENCES users(id)
 );
 
--- Table to store product categories
-CREATE TABLE categories (
+CREATE TABLE product_reviews (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(100) NOT NULL,
-    description TEXT
+    user_id INT NOT NULL,
+    product_id INT NOT NULL,
+    rating INT NOT NULL,
+    review_text TEXT,
+    review_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id),
+    FOREIGN KEY (product_id) REFERENCES products(id)
 );
 
--- Table to store products
-CREATE TABLE products (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
-    description TEXT,
-    price DECIMAL(10, 2) NOT NULL,
-    image_url VARCHAR(255),
-    category_id INT,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    FOREIGN KEY (category_id) REFERENCES categories(id)
-);
-
--- Table to store user orders
+-- Create the remaining tables
 CREATE TABLE orders (
     id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT NOT NULL,
@@ -63,7 +84,6 @@ CREATE TABLE orders (
     FOREIGN KEY (user_id) REFERENCES users(id)
 );
 
--- Table to store order items (products within an order)
 CREATE TABLE order_items (
     id INT AUTO_INCREMENT PRIMARY KEY,
     order_id INT NOT NULL,
@@ -74,7 +94,6 @@ CREATE TABLE order_items (
     FOREIGN KEY (product_id) REFERENCES products(id)
 );
 
--- Table to store payment transactions
 CREATE TABLE payment_transactions (
     id INT AUTO_INCREMENT PRIMARY KEY,
     order_id INT NOT NULL,
@@ -85,6 +104,3 @@ CREATE TABLE payment_transactions (
     transaction_timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (order_id) REFERENCES orders(id)
 );
-
--- Other tables for additional features or entities as needed
-
