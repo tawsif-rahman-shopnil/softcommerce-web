@@ -85,7 +85,7 @@
     
                     <!-- LOGO -->
                     <div class="logo-box">
-                        <a href="index.html" class="logo logo-dark text-center">
+                        <a href="dashboard.php" class="logo logo-dark text-center">
                             <span class="logo-sm">
                                 <img src="assets/images/logo.png " alt="" height="22">
                             </span>
@@ -158,14 +158,20 @@
                 
                             <li>
                                 <a href="dashboard.php">
-                                    <i class=" ti-panel"></i>
+                                    <i class="ti-panel"></i>
                                     <span> Dashboard </span>
                                 </a>
                             </li>
 
                             <li>
                                 <a href="products.php">
-                                    <i class="fe-shopping-bag"></i>
+                                    <i class="fas fa-plus"></i>
+                                    <span> Add Products </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="all_products.php">
+                                    <i class="fe-database"></i>
                                     <span> Products </span>
                                 </a>
                             </li>

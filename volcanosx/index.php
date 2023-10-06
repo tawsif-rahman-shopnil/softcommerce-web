@@ -26,9 +26,9 @@
         <div class="row justify-content-center">
             <div class="col-md-8 col-lg-6 col-xl-4">
                 <div class="text-center">
-                    <a href="index.html">
+                    <a href="index.php">
                         <!-- Replace the src attribute with your logo image path -->
-                        <img src="assets/images/your_logo.png" alt="Logo" height="22" class="mx-auto">
+                        <img src="assets/images/logo.png" alt="Logo" height="22" class="mx-auto">
                     </a>
                     <p class="text-muted mt-2 mb-4">Admin Login</p>
                 </div>

@@ -25,6 +25,9 @@ CREATE TABLE IF NOT EXISTS admins (
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
+INSERT INTO `admins` (`id`, `username`, `email`, `password`) VALUES
+(1, 'admin','admin@example.com', MD5('admin'));
+
 -- Table to store the relationship between admin users and regular users
 CREATE TABLE IF NOT EXISTS admin_user_relationship (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -111,11 +114,8 @@ CREATE TABLE IF NOT EXISTS user_products (
 );
 
 -- Create sample categories (Games and Softwares)
-INSERT INTO products (name, description, price, thumb, is_feat, category) VALUES
-('Sample Game 1', 'Description of Sample Game 1', 19.99, 'game1.jpg', 'N', 'Games'),
-('Sample Game 2', 'Description of Sample Game 2', 24.99, 'game2.jpg', 'N', 'Games'),
-('Sample Software 1', 'Description of Sample Software 1', 29.99, 'software1.jpg', 'N', 'Softwares'),
-('Sample Software 2', 'Description of Sample Software 2', 34.99, 'software2.jpg', 'N', 'Softwares');
+INSERT INTO `products` (`id`, `name`, `description`, `price`, `thumb`, `det_img1`, `det_img2`, `det_img3`, `feat_img`, `is_feat`, `total_downloads`, `average_rating`, `num_reviews`, `category`, `created_at`, `updated_at`) VALUES
+(6, 'rt4w45t3w5t', '34t35t34t', 1500.00, '../images/popular-01.jpg', '../images/details-01.jpg', '../images/feature-right.jpg', '../images/clip-04.jpg', '../images/featured-01.jpg', 'Y', 0, 0.00, 0, 'Games', '2023-10-06 18:24:13', '2023-10-06 18:24:13');
 
 -- View total orders by category
 SELECT category, COUNT(orders.id) AS total_orders

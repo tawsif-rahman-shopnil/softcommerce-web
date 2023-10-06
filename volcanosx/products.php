@@ -3,7 +3,7 @@
     <head>
 
         <meta charset="utf-8" />
-        <title>Dashboard</title>
+        <title>Crednik - Add Products</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
         <meta content="Coderthemes" name="author" />
@@ -85,7 +85,7 @@
     
                     <!-- LOGO -->
                     <div class="logo-box">
-                        <a href="index.html" class="logo logo-dark text-center">
+                        <a href="dashboard.php" class="logo logo-dark text-center">
                             <span class="logo-sm">
                                 <img src="assets/images/logo.png " alt="" height="22">
                             </span>
@@ -101,12 +101,7 @@
                                 <i class="fe-menu"></i>
                             </button>
                         </li>
-    
-                        <li>
-                            <h4 class="page-title-main">
-                                Products
-                            </h4>
-                        </li>
+
             
                     </ul>
 
@@ -159,17 +154,24 @@
                 
                             <li>
                                 <a href="dashboard.php">
-                                    <i class=" ti-panel"></i>
+                                    <i class="ti-panel"></i>
                                     <span> Dashboard </span>
                                 </a>
                             </li>
 
                             <li>
                                 <a href="products.php">
-                                    <i class="fe-shopping-bag"></i>
+                                    <i class="fas fa-plus"></i>
+                                    <span> Add Products </span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="all_products.php">
+                                    <i class="fe-database"></i>
                                     <span> Products </span>
                                 </a>
                             </li>
+
 
                             
 
@@ -187,10 +189,124 @@
             <!-- ============================================================== -->
             <!-- Start Page Content here -->
             <!-- ============================================================== -->
-         
+            <div class="content-page">
+                <div class="content">
 
-
+                    <!-- Start Content-->
+                    <div class="container-fluid">       
+                            <!-- Add Product Form -->
+    <div class="container">
+        <h2>Add a New Product</h2>
+        <?php
+        // Handle form submission
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            // Include the database connection
+            include 'dbcon.php';
             
+            // Retrieve form data
+            $name = $_POST['name'];
+            $description = $_POST['description'];
+            $price = $_POST['price'];
+            $is_feat = $_POST['is_feat'];
+            $category = $_POST['category'];
+
+            // Handle image uploads
+            $uploadDir = "../images/"; // Directory to store uploaded images
+
+            // Upload Thumbnail Image
+            $thumb = $uploadDir . basename($_FILES["thumb"]["name"]);
+            move_uploaded_file($_FILES["thumb"]["tmp_name"], $thumb);
+
+            // Upload Detailed Images
+            $det_img1 = $uploadDir . basename($_FILES["det_img1"]["name"]);
+            move_uploaded_file($_FILES["det_img1"]["tmp_name"], $det_img1);
+
+            $det_img2 = $uploadDir . basename($_FILES["det_img2"]["name"]);
+            move_uploaded_file($_FILES["det_img2"]["tmp_name"], $det_img2);
+
+            $det_img3 = $uploadDir . basename($_FILES["det_img3"]["name"]);
+            move_uploaded_file($_FILES["det_img3"]["tmp_name"], $det_img3);
+
+            // Upload Featured Image
+            $feat_img = $uploadDir . basename($_FILES["feat_img"]["name"]);
+            move_uploaded_file($_FILES["feat_img"]["tmp_name"], $feat_img);
+
+            // Perform SQL query to insert the data into the 'products' table
+            $sql = "INSERT INTO products (name, description, price, thumb, det_img1, det_img2, det_img3, feat_img, is_feat, category)
+                    VALUES ('$name', '$description', $price, '$thumb', '$det_img1', '$det_img2', '$det_img3', '$feat_img', '$is_feat', '$category')";
+
+            if (mysqli_query($conn, $sql)) {
+                // Product added successfully
+                echo '<div class="alert alert-success">Product added successfully!</div>';
+            } else {
+                echo '<div class="alert alert-danger">Error: ' . mysqli_error($conn) . '</div>';
+            }
+
+            // Close the database connection
+            mysqli_close($conn);
+        }
+        ?>
+
+        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST" enctype="multipart/form-data">
+            
+        <div class="mb-3">
+                <label for="name" class="form-label">Product Name</label>
+                <input type="text" class="form-control" id="name" name="name" required>
+            </div>
+            <div class="mb-3">
+                <label for="description" class="form-label">Description</label>
+                <textarea class="form-control" id="description" name="description" rows="3"></textarea>
+            </div>
+            <div class="mb-3">
+                <label for="price" class="form-label">Price</label>
+                <input type="number" class="form-control" id="price" name="price" step="0.01" required>
+            </div>
+            
+            <!-- Thumbnail Image Upload -->
+            <div class="mb-3">
+                <label for="thumb" class="form-label">Thumbnail Image</label>
+                <input type="file" class="form-control" id="thumb" name="thumb" accept="image/*" required>
+            </div>
+            
+            <!-- Detailed Images Upload -->
+            <div class="mb-3">
+                <label for="det_img1" class="form-label">Detailed Image 1</label>
+                <input type="file" class="form-control" id="det_img1" name="det_img1" accept="image/*" required>
+            </div>
+            <div class="mb-3">
+                <label for="det_img2" class="form-label">Detailed Image 2</label>
+                <input type="file" class="form-control" id="det_img2" name="det_img2" accept="image/*">
+            </div>
+            <div class="mb-3">
+                <label for="det_img3" class="form-label">Detailed Image 3</label>
+                <input type="file" class="form-control" id="det_img3" name="det_img3" accept="image/*">
+            </div>
+            
+            <!-- Featured Image Upload -->
+            <div class="mb-3">
+                <label for="feat_img" class="form-label">Featured Image</label>
+                <input type="file" class="form-control" id="feat_img" name="feat_img" accept="image/*" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="is_feat" class="form-label">Is Featured</label>
+                <select class="form-select" id="is_feat" name="is_feat">
+                    <option value="Y">Yes</option>
+                    <option value="N">No</option>
+                    <option value="N/A">Not Applicable</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="category" class="form-label">Category</label>
+                <select class="form-select" id="category" name="category">
+                    <option value="Games">Games</option>
+                    <option value="Softwares">Softwares</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Add Product</button>
+        </form>
+    </div>
 
                                
                             </div><!-- end col -->
