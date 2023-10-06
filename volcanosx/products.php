@@ -103,7 +103,9 @@
                         </li>
     
                         <li>
-                            <h4 class="page-title-main">Dashboard</h4>
+                            <h4 class="page-title-main">
+                                Products
+                            </h4>
                         </li>
             
                     </ul>
@@ -150,7 +152,6 @@
 
                     </div>
 
-
                     <!--- Sidemenu -->
                     <div id="sidebar-menu">
 
@@ -187,222 +188,9 @@
             <!-- Start Page Content here -->
             <!-- ============================================================== -->
          
-            <div class="content-page">
-                <div class="content">
-
-                    <!-- Start Content-->
-                    <div class="container-fluid">
-
-                        <div class="row">
-
-                            <div class="col-xl-3 col-md-6">
-                                <div class="card">
-                                    <div class="card-body">
-    
-                                        <h4 class="header-title mt-0 mb-4">Total Sell</h4>
-    
-                                        <div class="widget-chart-1">
-                                            <div class="widget-chart-box-1 float-start" dir="ltr">
-                                                <input data-plugin="knob" data-width="70" data-height="70" data-fgColor="#f05050 "
-                                                       data-bgColor="#F9B9B9" value="25"
-                                                       data-skin="tron" data-angleOffset="180" data-readOnly=true
-                                                       data-thickness=".15"/>
-                                            </div>
-    
-                                            <div class="widget-detail-1 text-end">
-                                                <h2 class="fw-normal pt-2 mb-1"> 25 </h2>
-                                                <p class="text-muted mb-1">Total sell this week</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div><!-- end col -->
-
-                            <div class="col-xl-3 col-md-6">
-                                <div class="card">
-                                    <div class="card-body">
-    
-                                        <h4 class="header-title mt-0 mb-3">Sales Analytics</h4>
-    
-                                        <div class="widget-box-2">
-                                            <div class="widget-detail-2 text-end">
-                                                <span class="badge bg-success rounded-pill float-start mt-3">3% <i class="mdi mdi-trending-up"></i> </span>
-                                                <h2 class="fw-normal mb-1"> 84$ </h2>
-                                                <p class="text-muted mb-3">Revenue today</p>
-                                            </div>
-                                            <div class="progress progress-bar-alt-success progress-sm">
-                                                <div class="progress-bar bg-success" role="progressbar"
-                                                        aria-valuenow="77" aria-valuemin="0" aria-valuemax="100"
-                                                        style="width: 7%;">
-                                                    <span class="visually-hidden">77% Complete</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div><!-- end col -->
-
-                            <div class="col-xl-3 col-md-6">
-                                <div class="card">
-                                    <div class="card-body">
-    
-                                        <h4 class="header-title mt-0 mb-4">Statistics</h4>
-    
-                                        <div class="widget-chart-1">
-                                            <div class="widget-chart-box-1 float-start" dir="ltr">
-                                                <input data-plugin="knob" data-width="70" data-height="70" data-fgColor="#ffbd4a"
-                                                        data-bgColor="#FFE6BA" value="69"
-                                                        data-skin="tron" data-angleOffset="180" data-readOnly=true
-                                                        data-thickness=".15"/>
-                                            </div>
-                                            <div class="widget-detail-1 text-end">
-                                                <h2 class="fw-normal pt-2 mb-1"> 69 </h2>
-                                                <p class="text-muted mb-1">Revenue today</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div><!-- end col -->
-
-                            <div class="col-xl-3 col-md-6">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <h4 class="header-title mt-0 mb-3">Daily Sales</h4>
-    
-                                        <div class="widget-box-2">
-                                            <div class="widget-detail-2 text-end">
-                                                <span class="badge bg-pink rounded-pill float-start mt-3">3% <i class="mdi mdi-trending-up"></i> </span>
-                                                <h2 class="fw-normal mb-1"> 5 </h2>
-                                                <p class="text-muted mb-3">Daily Average</p>
-                                            </div>
-                                            <div class="progress progress-bar-alt-pink progress-sm">
-                                                <div class="progress-bar bg-pink" role="progressbar"
-                                                        aria-valuenow="77" aria-valuemin="0" aria-valuemax="100"
-                                                        style="width: 7%;">
-                                                    <span class="visually-hidden">77% Complete</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                            </div><!-- end col -->
-
-                        </div>
-                        <!-- end row -->
-
-                        <div class="row">
-                            <div class="col-xl-4">
-                                <div class="card">
-                                    <div class="card-body">
-
-                                        <h4 class="header-title mt-0">Daily Sales</h4>
-
-<div class="widget-chart text-center">
-    <div id="donutChartContainer" style="height: 245px;" class="morris-chart">
-        <canvas id="donutChart" width="400" height="400"></canvas>
-    </div>
-    <ul class="list-inline chart-detail-list mb-0">
-    </ul>
-</div>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
-<script>
-    var ctx = document.getElementById('donutChart').getContext('2d');
-    var donutChart = new Chart(ctx, {
-        type: 'doughnut',
-        data: {
-            labels: ['Softwares', 'Games'],
-            datasets: [{
-                data: [12, 13], // Replace with your actual data
-                backgroundColor: ['#ff8acc', '#5b69bc'],
-            }],
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            legend: {
-                display: true,
-            },
-        },
-    });
-</script>
-
-                                    </div>
-                                </div>
-                            </div><!-- end col -->
-
-                        
 
 
-                     
-
-                            <div class="col-xl-8">
-                                <div class="card">
-                                    <div class="card-body">
-    
-                                        <h4 class="header-title mt-0 mb-3">Sales Report</h4>
-
-<div class="table-responsive table-container">
-    <table class="table table-hover mb-0">
-        <thead>
-            <tr>
-                <th>#</th>
-                <th>Product Name</th>
-                <th>Purchase Date</th>
-                <th>Payment Status</th>
-            </tr>
-        </thead>
-        <?php
-        $products = [
-            "Ferrari 296 GTS",
-            "MiMi Jump",
-            "Piko Run- Bumpy Clam",
-            "Jack-city",
-            "Lovely Giraffe",
-            "Swell Trip",
-            "Mr. City Builder",
-            "Parking Jam"
-        ];
-
-        function getRandomDate()
-        {
-            $startDate = strtotime('20-06-2023');
-            $endDate = strtotime('23-09-2023');
-            $randomTimestamp = mt_rand($startDate, $endDate);
-            return date("d/m/Y", $randomTimestamp);
-        }
-
-        function getRandomPaymentStatus()
-        {
-            $statuses = ['Paid', 'Pending', 'Processing'];
-            return $statuses[array_rand($statuses)];
-        }
-
-        echo '<tbody>';
-        for ($i = 1; $i <= 138; $i++) { // Generate 150 rows
-            echo '<tr>';
-            echo '<td>' . $i . '</td>';
-            $productName = $products[array_rand($products)]; // Random product name
-            echo '<td>' . $productName . '</td>';
-            echo '<td>' . getRandomDate() . '</td>';
-            echo '<td><span class="badge ';
-            $status = getRandomPaymentStatus();
-            if ($status === 'Paid') {
-                echo 'bg-success">Paid</span>';
-            } elseif ($status === 'Pending') {
-                echo 'bg-warning">Pending</span>';
-            } else {
-                echo 'bg-primary">Processing</span>';
-            }
-            echo '</td>';
-            echo '</tr>';
-        }
-        echo '</tbody>';
-        ?>
-    </table>
-</div>
-
+            
 
                                
                             </div><!-- end col -->
