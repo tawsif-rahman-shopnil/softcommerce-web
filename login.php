@@ -95,30 +95,43 @@ include 'volcanosx/dbcon.php';
 if (isset($_POST["submit"])) {
     // Retrieve form data
     $username = $_POST['username'];
-    $password = password_hash($_POST['password'], PASSWORD_DEFAULT); // Hash the password for security
+    $password = $_POST['password'];
 
-    // SQL query to insert data into the database
-    $sql = "INSERT INTO users (username, password) VALUES (?, ?)";
-
+    // SQL query to retrieve the user's hashed password based on the provided username
+    $sql = "SELECT username, password FROM users WHERE username = ?";
+    
     // Prepare the SQL statement
     $stmt = $pdo->prepare($sql);
-
+    
     if ($stmt) {
         // Bind parameters
         $stmt->bindParam(1, $username);
-        $stmt->bindParam(2, $password);
 
         // Execute the prepared statement
-        if ($stmt->execute()) {
-            echo "Registration successful. You can now log in.";
+        $stmt->execute();
+        
+        // Fetch the result
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        
+        if ($row) {
+            // Verify the password
+            $hashedPassword = $row['password'];
+            if (password_verify($password, $hashedPassword)) {
+                // Password is correct, user is authenticated
+                header("Location: profile.php");
+                // You can set session variables or redirect to a dashboard here.
+            } else {
+                echo "Error: Incorrect password. Please try again.";
+            }
         } else {
-            echo "Error: Registration failed.";
+            echo "Error: Username not found. Please register or check your username.";
         }
     } else {
         echo "Error: Unable to prepare the SQL statement.";
     }
 }
 ?>
+
 <!-- ***** Buttons Area End ***** -->
 
         

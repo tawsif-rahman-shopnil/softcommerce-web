@@ -8,7 +8,7 @@
 
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-    <title> Game/App Shop </title>
+    <title> Crednik </title>
 
     <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -32,8 +32,8 @@
             <div class="col-12">
                 <nav class="main-nav">
                     <!-- ***** Logo Start ***** -->
-                    <a href="index.html" class="logo">
-                        <img src="assets/images/ " alt="">
+                    <a href="index.php" class="logo">
+                        <img src="assets/images/logo.png " alt="">
                     </a>
                     <!-- ***** Logo End ***** -->
                     <!-- ***** Search End ***** -->
@@ -46,11 +46,14 @@
                     <!-- ***** Search End ***** -->
                     <!-- ***** Menu Start ***** -->
                     <ul class="nav">
-                        <li><a href="index.html" class="active">Home</a></li>
-                        <li><a href="browse.html">Collections</a></li>
-                        <li><a href="details.html">Games</a></li>
-                        <li><a href="streams.html">Softwares</a></li>
-                        <li><a href="profile.html">Profile <img src="assets/images/profile-header.jpg" alt=""></a></li>
+                        <li><a href="index.php">Home</a></li>
+                        <li><a href="games.php">Games</a></li>
+                        <li><a href="softwares.php">Softwares</a></li>
+                        <li><a href="about.php">About</a></li>
+                        <li><a href="contact.php">Contact</a></li>
+                        <div class="main-button">
+                          <a href="custauth.php">Login/Sign-up</a>
+                        </div>
                     </ul>   
                     <a class='menu-trigger'>
                         <span>Menu</span>
