@@ -73,7 +73,7 @@
         <div class="page-content">
 
           <!-- ***** Buttons Area Start ***** -->
-    <div class="buttons-container">    
+    <div class="buttons-container" style="margin-top: 90px;">    
         <div class="button">
             <a href="signup.php">Sign-up</a></br>
             <a href="login.php">Login</a>

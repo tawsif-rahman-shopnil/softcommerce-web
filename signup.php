@@ -72,7 +72,7 @@
         <div class="page-content">
 
           <!-- ***** Buttons Area Start ***** -->
-          <div class="auth-container">    
+          <div class="auth-container" style="margin-top: 90px;">    
         <div class="button">
             <form method="POST" action="">
                 <label for="username">Username:</label>

@@ -82,9 +82,6 @@
                   <div class="item">
                     <div class="thumb">
                       <img src="assets/images/featured-01.jpg" alt="">
-                      <div class="hover-effect">
-                        <h6>2.4K Streaming</h6>
-                      </div>
                     </div>
                     <h4>CS-GO<br><span>249K Downloads</span></h4>
                     <ul>
@@ -92,71 +89,7 @@
                       <li><i class="fa fa-download"></i> 2.3M</li>
                     </ul>
                   </div>
-                  <div class="item">
-                    <div class="thumb">
-                      <img src="assets/images/featured-02.jpg" alt="">
-                      <div class="hover-effect">
-                        <h6>2.4K Streaming</h6>
-                      </div>
-                    </div>
-                    <h4>Gamezer<br><span>249K Downloads</span></h4>
-                    <ul>
-                      <li><i class="fa fa-star"></i> 4.8</li>
-                      <li><i class="fa fa-download"></i> 2.3M</li>
-                    </ul>
-                  </div>
-                  <div class="item">
-                    <div class="thumb">
-                      <img src="assets/images/featured-03.jpg" alt="">
-                      <div class="hover-effect">
-                        <h6>2.4K Streaming</h6>
-                      </div>
-                    </div>
-                    <h4>Island Rusty<br><span>249K Downloads</span></h4>
-                    <ul>
-                      <li><i class="fa fa-star"></i> 4.8</li>
-                      <li><i class="fa fa-download"></i> 2.3M</li>
-                    </ul>
-                  </div>
-                  <div class="item">
-                    <div class="thumb">
-                      <img src="assets/images/featured-01.jpg" alt="">
-                      <div class="hover-effect">
-                        <h6>2.4K Streaming</h6>
-                      </div>
-                    </div>
-                    <h4>CS-GO<br><span>249K Downloads</span></h4>
-                    <ul>
-                      <li><i class="fa fa-star"></i> 4.8</li>
-                      <li><i class="fa fa-download"></i> 2.3M</li>
-                    </ul>
-                  </div>
-                  <div class="item">
-                    <div class="thumb">
-                      <img src="assets/images/featured-02.jpg" alt="">
-                      <div class="hover-effect">
-                        <h6>2.4K Streaming</h6>
-                      </div>
-                    </div>
-                    <h4>Gamezer<br><span>249K Downloads</span></h4>
-                    <ul>
-                      <li><i class="fa fa-star"></i> 4.8</li>
-                      <li><i class="fa fa-download"></i> 2.3M</li>
-                    </ul>
-                  </div>
-                  <div class="item">
-                    <div class="thumb">
-                      <img src="assets/images/featured-03.jpg" alt="">
-                      <div class="hover-effect">
-                        <h6>2.4K Streaming</h6>
-                      </div>
-                    </div>
-                    <h4>Island Rusty<br><span>249K Downloads</span></h4>
-                    <ul>
-                      <li><i class="fa fa-star"></i> 4.8</li>
-                      <li><i class="fa fa-download"></i> 2.3M</li>
-                    </ul>
-                  </div>
+                  
                 </div>
               </div>
             </div>
@@ -166,40 +99,48 @@
                   <h4><em>Top</em> Downloaded</h4>
                 </div>
                 <ul>
-                  <li>
-                    <img src="assets/images/game-01.jpg" alt="" class="templatemo-item">
-                    <h4>Fortnite</h4>
-                    <h6>Sandbox</h6>
-                    <span><i class="fa fa-star" style="color: yellow;"></i> 4.9</span>
-                    <span><i class="fa fa-download" style="color: #ec6090;"></i> 2.2M</span>
-                    <div class="download">
-                      <a href="#"><i class="fa fa-download"></i></a>
-                    </div>
-                  </li>
-                  <li>
-                    <img src="assets/images/game-02.jpg" alt="" class="templatemo-item">
-                    <h4>CS-GO</h4>
-                    <h6>Legendary</h6>
-                    <span><i class="fa fa-star" style="color: yellow;"></i> 4.9</span>
-                    <span><i class="fa fa-download" style="color: #ec6090;"></i> 2.2M</span>
-                    <div class="download">
-                      <a href="#"><i class="fa fa-download"></i></a>
-                    </div>
-                  </li>
-                  <li>
-                    <img src="assets/images/game-03.jpg" alt="" class="templatemo-item">
-                    <h4>PugG</h4>
-                    <h6>Battle Royale</h6>
-                    <span><i class="fa fa-star" style="color: yellow;"></i> 4.9</span>
-                    <span><i class="fa fa-download" style="color: #ec6090;"></i> 2.2M</span>
-                    <div class="download">
-                      <a href="#"><i class="fa fa-download"></i></a>
-                    </div>
-                  </li>
-                </ul>
-                <div class="text-button">
-                  <a href="profile.html">View All Games</a>
-                </div>
+<?php
+// Include your database connection
+include 'volcanosx/dbcon.php';
+
+// Query to retrieve the required data from the database
+$sql = "SELECT p.id, p.name, p.category, p.thumb, pr.rating, oi.quantity
+        FROM products p
+        LEFT JOIN product_reviews pr ON p.id = pr.product_id
+        LEFT JOIN order_items oi ON p.id = oi.product_id";
+
+$result = mysqli_query($conn, $sql);
+
+if (mysqli_num_rows($result) > 0) {
+    while ($row = mysqli_fetch_assoc($result)) {
+        $categoryIcon = '';
+        if ($row['category'] === 'Games') {
+            $categoryIcon = '<i class="fa fa-gamepad"></i>';
+        } elseif ($row['category'] === 'Software') {
+            $categoryIcon = '<i class="fa fa-cogs"></i>';
+        }
+        $thumb = str_replace('../', '', $row['thumb']);
+        echo '
+        <li>
+          <img src="' . $thumb . '" alt="" class="templatemo-item">
+          <h4>' . $row['name'] . '</h4>
+          <h6>' . $categoryIcon . ' ' . $row['category'] . '</h6>
+          <span><i class="fa fa-star" style="color: yellow;"></i> ' . $row['rating'] . '</span>
+          <span><i class="fa fa-download" style="color: #ec6090;"></i> ' . $row['quantity'] . '</span>
+          <div class="download">
+            <a href="custauth.php"><i class="fa fa-download"></i></a>
+          </div>
+        </li>';
+    }
+} else {
+    echo "No data found.";
+}
+
+// Close the database connection
+mysqli_close($conn);
+?>
+</ul>
+
               </div>
             </div>
           </div>
@@ -209,62 +150,43 @@
                  <div class="start-stream">
                   <div class="col-lg-12">
                     <div class="heading-section">
-                      <h4>What do we have?</h4>
+                      <h4>Our Library</h4>
                     </div>
                     <div class="row">
-                      <div class="col-lg-4">
-                        <div class="item">
-                          <div class="icon">
-                            <img src="assets/images/service-01.jpg" alt="" style="max-width: 60px; border-radius: 50%;">
-                          </div>
-                          <h4>Go To Your Profile</h4>
-                          <p>Cyborg Gaming is free HTML CSS website template provided by TemplateMo. This is Bootstrap v5.2.0 layout.</p>
-                        </div>
-                      </div>
-                      <div class="col-lg-4">
-                        <div class="item">
-                          <div class="icon">
-                            <img src="assets/images/service-02.jpg" alt="" style="max-width: 60px; border-radius: 50%;">
-                          </div>
-                          <h4>Live Stream Button</h4>
-                          <p>If you wish to support us, you can make a <a href="https://paypal.me/templatemo" target="_blank">small contribution via PayPal</a> to info [at] templatemo.com</p>
-                        </div>
-                      </div>
-                      <div class="col-lg-4">
-                        <div class="item">
-                          <div class="icon">
-                            <img src="assets/images/service-03.jpg" alt="" style="max-width: 60px; border-radius: 50%;">
-                          </div>
-                          <h4>You Are Live</h4>
-                          <p>You are not allowed to redistribute this template's downloadable ZIP file on any other template collection website.</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <!-- ***** Start Stream End ***** -->
-      
-                <!-- ***** Live Stream Start ***** -->
-                  <div class="most-popular">
-                    <div class="row">
-                      <div class="col-lg-12">
-                        <div class="heading-section">
-                          <h4> Most Downloaded Games </h4>
-                        </div>
-                        <div class="row">
-                          <div class="col-lg-3 col-sm-6">
-                            <div class="item">
-                              <img src="assets/images/popular-01.jpg" alt="">
-                              <h4>Fortnite<br><span>Sandbox</span></h4>
-                              <ul>
-                                <li><i class="fa fa-star"></i> 4.8</li>
-                                <li><i class="fa fa-download"></i> 2.3M</li>
-                              </ul>
-                            </div>
-                          </div>
-                    
-                  </div>
-                </div>
+<?php
+// Include your database connection
+include 'volcanosx/dbcon.php';
+
+// Query to retrieve the required data from the database
+$sql = "SELECT p.thumb, p.name, pr.rating, oi.quantity
+        FROM products p
+        LEFT JOIN product_reviews pr ON p.id = pr.product_id
+        LEFT JOIN order_items oi ON p.id = oi.product_id";
+
+$result = mysqli_query($conn, $sql);
+
+if (mysqli_num_rows($result) > 0) {
+    while ($row = mysqli_fetch_assoc($result)) {
+        // Remove the '../' part from the 'thumb' field
+        $thumb = str_replace('../', '', $row['thumb']);
+        
+        echo '
+        <div class="col-lg-3 col-sm-6">
+          <div class="item">
+            <img src="' . $thumb . '" alt="">
+            <h4>' . $row['name'] . '</h4>
+          </div>
+        </div>';
+    }
+} else {
+    echo "No data found.";
+}
+
+// Close the database connection
+mysqli_close($conn);
+?>
+</div>
+
                 <!-- ***** Live Stream End ***** -->
         </div>
       </div>
