@@ -210,11 +210,13 @@ if (isset($_GET['id'])) {
         $price = $row['price'];
         $is_feat = $row['is_feat'];
         $category = $row['category'];
+        $icon = $row['icon'];
         $thumb = $row['thumb'];
         $det_img1 = $row['det_img1'];
         $det_img2 = $row['det_img2'];
         $det_img3 = $row['det_img3'];
         $feat_img = $row['feat_img'];
+        $dl_link = $row['dl_link'];
     } else {
         // Product with the specified ID not found
         echo '<div class="alert alert-danger">Product not found.</div>';
@@ -234,10 +236,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $price = $_POST['price'];
     $is_feat = $_POST['is_feat'];
     $category = $_POST['category'];
+    $dl_link = $_POST['dl_link'];
 
     // Handle image uploads and updates
     $uploadDir = "../images/"; // Directory to store uploaded images
 
+    // Upload Icon Image if a new file is provided
+    if (!empty($_FILES["icon"]["name"])) {
+        $icon = $uploadDir . basename($_FILES["icon"]["name"]);
+        move_uploaded_file($_FILES["icon"]["tmp_name"], $icon);
+    }
+    
     // Upload Thumbnail Image if a new file is provided
     if (!empty($_FILES["thumb"]["name"])) {
         $thumb = $uploadDir . basename($_FILES["thumb"]["name"]);
@@ -273,10 +282,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             price = $price,
             is_feat = '$is_feat',
             category = '$category',
+            icon = '$icon',
             thumb = '$thumb',
             det_img1 = '$det_img1',
             det_img2 = '$det_img2',
             det_img3 = '$det_img3',
+            dl_link = '$dl_link',
             feat_img = '$feat_img'
             WHERE id = $modifyId";
 
@@ -316,6 +327,10 @@ mysqli_close($conn);
                             <input type="number" class="form-control" id="price" name="price" step="0.01" value="<?php echo $price; ?>" required>
                         </div>
                         <div class="mb-3">
+                            <label for="name" class="form-label">Download Link</label>
+                            <input type="text" class="form-control" id="dl_link" name="dl_link" value="<?php echo $dl_link; ?>" required>
+                        </div>
+                        <div class="mb-3">
                             <label for="is_feat" class="form-label">Is Featured</label>
                             <select class="form-select" id="is_feat" name="is_feat">
                                 <option value="Y" <?php if ($is_feat === 'Y') echo 'selected'; ?>>Yes</option>
@@ -329,6 +344,14 @@ mysqli_close($conn);
                                 <option value="Games" <?php if ($category === 'Games') echo 'selected'; ?>>Games</option>
                                 <option value="Softwares" <?php if ($category === 'Softwares') echo 'selected'; ?>>Softwares</option>
                             </select>
+                        </div>
+                        <!-- Icon Image -->
+                        <div class="mb-3">
+                            <label for="thumb" class="form-label">Icon Image</label>
+                            <input type="file" class="form-control" id="icon" name="icon" accept="image/*">
+                            <?php if (!empty($icon)) : ?>
+                                <img src="<?php echo $icon; ?>" alt="Icon" class="img-icon" width="100">
+                            <?php endif; ?>
                         </div>
                         <!-- Thumbnail Image -->
                         <div class="mb-3">

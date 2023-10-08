@@ -17,13 +17,7 @@
 
         <!-- icons -->
         <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
-        <style>
-        /* Add your custom CSS styles here */
-        .table-container {
-            max-height: 500px; /* Set your desired max height for the table */
-            overflow-y: auto; /* Enable vertical scroll */
-        }
-    </style>
+
 
     </head>
 
@@ -195,7 +189,6 @@
                     <!-- Start Content-->
                     <div class="container-fluid">       
                             <!-- Add Product Form -->
-
                             <div class="container-fluid">
     <div class="row">
         <div class="col-12">
@@ -204,22 +197,24 @@
                     <h4 class="mt-0 header-title">Product List</h4>
                     <p class="text-muted font-14 mb-3">List of all products</p>
 
-                    <table class="table table-hover table-bordered mb-0">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Name</th>
-                                <th>Description</th>
-                                <th>Price</th>
-                                <th>Thumbnail</th>
-                                <th>Detailed Images</th>
-                                <th>Featured Image</th>
-                                <th>Is Featured</th>
-                                <th>Category</th>
-                                <th>Action</th> <!-- Add Action Column -->
-                            </tr>
-                        </thead>
-                        <tbody>
+                    <div class="table-responsive">
+                        <table class="table table-hover table-bordered mb-0">
+                            <thead>
+                                <tr>
+                                    <th>Action</th>
+                                    <th>Name</th>
+                                    <th>Description</th>
+                                    <th>Price</th>
+                                    <th>Icon</th>
+                                    <th>Thumbnail</th>
+                                    <th>Detailed Images</th>
+                                    <th>Featured Image</th>
+                                    <th>Is Featured</th>
+                                    <th>Category</th>
+                                    <th>Download Link</th>
+                                </tr>
+                            </thead>
+                            <tbody>
                             <?php
                             // Include the database connection
                             include 'dbcon.php';
@@ -242,10 +237,15 @@
                             if (mysqli_num_rows($result) > 0) {
                                 while ($row = mysqli_fetch_assoc($result)) {
                                     echo "<tr>";
-                                    echo "<td>{$row['id']}</td>";
+                                    echo "<td>";
+                                    echo "<a href='modify_product.php?id={$row['id']}' class='btn btn-warning'><i class='fas fa-edit'></i></a> ";
+                                    echo "<a href='?remove_id={$row['id']}' class='btn btn-danger' onclick='return confirm(\"Are you sure you want to remove this product?\");'><i class='fas fa-trash'></i></a>";
+                                    echo "</td>";
+
                                     echo "<td>{$row['name']}</td>";
                                     echo "<td>{$row['description']}</td>";
                                     echo "<td>{$row['price']}</td>";
+                                    echo "<td><img src='{$row['icon']}' alt='Icon' class='img-icon' width='25'></td>";
                                     echo "<td><img src='{$row['thumb']}' alt='Thumbnail' class='img-thumbnail' width='100'></td>";
                                     echo "<td>";
                                     if (!empty($row['det_img1'])) {
@@ -261,10 +261,8 @@
                                     echo "<td><img src='{$row['feat_img']}' alt='Featured Image' class='img-thumbnail' width='100'></td>";
                                     echo "<td>{$row['is_feat']}</td>";
                                     echo "<td>{$row['category']}</td>";
-                                    echo "<td>";
-                                    echo "<a href='modify_product.php?id={$row['id']}' class='btn btn-warning'>Modify</a> ";
-                                    echo "<a href='?remove_id={$row['id']}' class='btn btn-danger' onclick='return confirm(\"Are you sure you want to remove this product?\");'>Remove</a>";
-                                    echo "</td>";
+                                    echo "<td>{$row['dl_link']}</td>";
+
                                     echo "</tr>";
                                 }
                             } else {
@@ -283,7 +281,8 @@
                             mysqli_close($conn);
                             ?>
                         </tbody>
-                    </table>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

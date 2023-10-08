@@ -199,6 +199,9 @@
         <h2>Add a New Product</h2>
         <?php
         // Handle form submission
+        error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Include the database connection
             include 'dbcon.php';
@@ -209,31 +212,37 @@
             $price = $_POST['price'];
             $is_feat = $_POST['is_feat'];
             $category = $_POST['category'];
+            $dl_link = $_POST['dl_link'];
 
-            // Handle image uploads
-            $uploadDir = "../images/"; // Directory to store uploaded images
+ // Handle image uploads
+$uploadDir = "../images/"; // Directory to store uploaded images
 
-            // Upload Thumbnail Image
-            $thumb = $uploadDir . basename($_FILES["thumb"]["name"]);
-            move_uploaded_file($_FILES["thumb"]["tmp_name"], $thumb);
+// Upload Icon Image
+$icon = $uploadDir . basename($_FILES["icon"]["name"]);
+move_uploaded_file($_FILES["icon"]["tmp_name"], $icon);
 
-            // Upload Detailed Images
-            $det_img1 = $uploadDir . basename($_FILES["det_img1"]["name"]);
-            move_uploaded_file($_FILES["det_img1"]["tmp_name"], $det_img1);
+// Upload Thumbnail Image
+$thumb = $uploadDir . basename($_FILES["thumb"]["name"]);
+move_uploaded_file($_FILES["thumb"]["tmp_name"], $thumb);
 
-            $det_img2 = $uploadDir . basename($_FILES["det_img2"]["name"]);
-            move_uploaded_file($_FILES["det_img2"]["tmp_name"], $det_img2);
+// Upload Detailed Images
+$det_img1 = $uploadDir . basename($_FILES["det_img1"]["name"]);
+move_uploaded_file($_FILES["det_img1"]["tmp_name"], $det_img1);
 
-            $det_img3 = $uploadDir . basename($_FILES["det_img3"]["name"]);
-            move_uploaded_file($_FILES["det_img3"]["tmp_name"], $det_img3);
+$det_img2 = $uploadDir . basename($_FILES["det_img2"]["name"]);
+move_uploaded_file($_FILES["det_img2"]["tmp_name"], $det_img2);
 
-            // Upload Featured Image
-            $feat_img = $uploadDir . basename($_FILES["feat_img"]["name"]);
-            move_uploaded_file($_FILES["feat_img"]["tmp_name"], $feat_img);
+$det_img3 = $uploadDir . basename($_FILES["det_img3"]["name"]);
+move_uploaded_file($_FILES["det_img3"]["tmp_name"], $det_img3);
+
+// Upload Featured Image
+$feat_img = $uploadDir . basename($_FILES["feat_img"]["name"]);
+move_uploaded_file($_FILES["feat_img"]["tmp_name"], $feat_img);
+
 
             // Perform SQL query to insert the data into the 'products' table
-            $sql = "INSERT INTO products (name, description, price, thumb, det_img1, det_img2, det_img3, feat_img, is_feat, category)
-                    VALUES ('$name', '$description', $price, '$thumb', '$det_img1', '$det_img2', '$det_img3', '$feat_img', '$is_feat', '$category')";
+            $sql = "INSERT INTO products (name, description, price, dl_link, icon, thumb, det_img1, det_img2, det_img3, feat_img, is_feat, category)
+                    VALUES ('$name', '$description', $price, '$dl_link', '$icon', '$thumb', '$det_img1', '$det_img2', '$det_img3', '$feat_img', '$is_feat', '$category')";
 
             if (mysqli_query($conn, $sql)) {
                 // Product added successfully
@@ -260,6 +269,16 @@
             <div class="mb-3">
                 <label for="price" class="form-label">Price</label>
                 <input type="number" class="form-control" id="price" name="price" step="0.01" required>
+            </div>
+            <div class="mb-3">
+                <label for="dl_link" class="form-label">Download Link</label>
+                <input type="dl_link" class="form-control" id="dl_link" name="dl_link" step="0.01" required>
+            </div>
+
+            <!-- Icon Image Upload -->
+            <div class="mb-3">
+                <label for="icon" class="form-label">Icon Image</label>
+                <input type="file" class="form-control" id="icon" name="icon" accept="image/*" required>
             </div>
             
             <!-- Thumbnail Image Upload -->
