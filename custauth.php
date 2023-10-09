@@ -67,20 +67,22 @@
   <!-- ***** Header Area End ***** -->
 
 
-  <div class="container">
+  <div class="container" style="margin-top: 90px;" >
     <div class="row">
       <div class="col-lg-12">
         <div class="page-content">
 
           <!-- ***** Buttons Area Start ***** -->
-    <div class="buttons-container" style="margin-top: 90px;">    
-        <div class="button">
-            <a href="signup.php">Sign-up</a></br>
-            <a href="login.php">Login</a>
-            <div class="g-signin2" data-width="300" data-height="200" data-longtitle="true">
-                
-        </div>
-        
-    </div>
+          <div class="buttons-container">
+            <div class="heading-section">
+                  <h4>Sign-up or Login to Continue</h4>      
+                <div class="button">
+                    <a href="signup.php">Sign-up</a></br>
+                    <a href="login.php">Login</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         <!-- ***** Buttons Area End ***** -->
   <?php require 'footer.php'; ?>

@@ -67,25 +67,27 @@
   <!-- ***** Header Area End ***** -->
 
 
-  <div class="container">
+  <div class="container" style="margin-top: 90px;" >
     <div class="row">
       <div class="col-lg-12">
         <div class="page-content">
+            <!-- ***** Buttons Area Start ***** -->
+            <div class="auth-container"> 
+                <div class="heading-section">
+                  <h4>Login to your Account</h4>   
+                  <div class="button">
+                    <form method="POST" action="">
+                        <label for="username">Username:</label>
+                        <input type="text" name="username" id="username" required><br>
 
-<!-- ***** Buttons Area Start ***** -->
-<div class="auth-container" style="margin-top: 90px;" >    
-    <div class="button">
-        <form method="POST" action="">
-            <label for="username">Username:</label>
-            <input type="text" name="username" id="username" required><br>
+                        <label for="password">Password:</label>
+                        <input type="password" name="password" id="password" required><br>
 
-            <label for="password">Password:</label>
-            <input type="password" name="password" id="password" required><br>
-
-            <input type="submit" name="submit" value="Login">
-        </form>
-    </div>
-</div>
+                        <input type="submit" name="submit" value="Login">
+                    </form>
+                </div>
+               </div>
+            </div>
 
 <?php
 // Include the database connection file
