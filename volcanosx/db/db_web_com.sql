@@ -132,10 +132,6 @@ CREATE TABLE `products` (
 --
 -- Dumping data for table `products`
 --
-
-INSERT INTO `products` (`id`, `name`, `description`, `price`, `icon`, `thumb`, `det_img1`, `det_img2`, `det_img3`, `feat_img`, `is_feat`, `total_downloads`, `average_rating`, `num_reviews`, `category`, `dl_link`, `created_at`, `updated_at`) VALUES
-(10, 'Ferrari 296 GTS', 'ssssss', '444.00', '../images/logo.jpg', '../images/logo.jpg', '../images/1.jpg', '../images/2.jpg', '../images/3.jpg', '../images/logo.jpg', 'Y', 0, '0.00', 0, 'Games', 'https://drive.google.com/drive/folders/1KzgAnqMl8XiZfjibrz-iQOPEYMp7a29P?usp=sharing', '2023-10-09 09:48:41', '2023-10-09 16:04:32');
-
 -- --------------------------------------------------------
 
 --
