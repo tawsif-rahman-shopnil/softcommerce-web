@@ -56,8 +56,19 @@ if (isset($_GET['id'])) {
     $modifyId = $_GET['id'];
 
     // Retrieve product details for modification
-    $sql = "SELECT * FROM products WHERE id = $modifyId";
-    $result = mysqli_query($conn, $sql);
+    $sql = "SELECT * FROM products WHERE id = ?";
+    
+    // Prepare the statement
+    $stmt = mysqli_prepare($conn, $sql);
+    
+    // Bind the parameter
+    mysqli_stmt_bind_param($stmt, "i", $modifyId);
+    
+    // Execute the statement
+    mysqli_stmt_execute($stmt);
+
+    // Get the result
+    $result = mysqli_stmt_get_result($stmt);
 
     if ($row = mysqli_fetch_assoc($result)) {
         $name = $row['name'];
@@ -130,33 +141,44 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         move_uploaded_file($_FILES["feat_img"]["tmp_name"], $feat_img);
     }
 
-    // Perform SQL query to update the product details
+    // Prepare the SQL statement with parameter binding
     $sql = "UPDATE products SET 
-            name = '$name',
-            description = '$description',
-            price = $price,
-            is_feat = '$is_feat',
-            category = '$category',
-            icon = '$icon',
-            thumb = '$thumb',
-            det_img1 = '$det_img1',
-            det_img2 = '$det_img2',
-            det_img3 = '$det_img3',
-            dl_link = '$dl_link',
-            feat_img = '$feat_img'
-            WHERE id = $modifyId";
+            name = ?,
+            description = ?,
+            price = ?,
+            is_feat = ?,
+            category = ?,
+            icon = ?,
+            thumb = ?,
+            det_img1 = ?,
+            det_img2 = ?,
+            det_img3 = ?,
+            dl_link = ?,
+            feat_img = ?
+            WHERE id = ?";
 
-    if (mysqli_query($conn, $sql)) {
+    // Prepare the statement
+    $stmt = mysqli_prepare($conn, $sql);
+
+    // Bind parameters
+    mysqli_stmt_bind_param($stmt, "ssdsssssssssi", $name, $description, $price, $is_feat, $category, $icon, $thumb, $det_img1, $det_img2, $det_img3, $dl_link, $feat_img, $modifyId);
+
+    // Execute the statement
+    if (mysqli_stmt_execute($stmt)) {
         // Product details updated successfully
         echo '<div class="alert alert-success">Product details updated successfully!</div>';
     } else {
-        echo '<div class="alert alert-danger">Error: ' . mysqli_error($conn) . '</div>';
+        echo '<div class="alert alert-danger">Error: ' . mysqli_stmt_error($stmt) . '</div>';
     }
+    
+    // Close the statement
+    mysqli_stmt_close($stmt);
 }
 
 // Close the database connection
 mysqli_close($conn);
 ?>
+
 <div class="container-fluid">
     <div class="row">
         <div class="col-12">

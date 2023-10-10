@@ -51,64 +51,94 @@
                             <!-- Add Product Form -->
     <div class="container">
         <h2>Add a New Product</h2>
-        <?php
-        // Handle form submission
-        error_reporting(E_ALL);
-ini_set('display_errors', 1);
+<?php
+// Include the database connection
+include 'dbcon.php';
 
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            // Include the database connection
-            include 'dbcon.php';
-            
-            // Retrieve form data
-            $name = $_POST['name'];
-            $description = $_POST['description'];
-            $price = $_POST['price'];
-            $is_feat = $_POST['is_feat'];
-            $category = $_POST['category'];
-            $dl_link = $_POST['dl_link'];
+// Handle form submission
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Retrieve and sanitize form data
+    $name = isset($_POST['name']) ? mysqli_real_escape_string($conn, $_POST['name']) : '';
+    $description = isset($_POST['description']) ? mysqli_real_escape_string($conn, $_POST['description']) : '';
+    $price = isset($_POST['price']) ? floatval($_POST['price']) : 0.00;
+    $dl_link = isset($_POST['dl_link']) ? mysqli_real_escape_string($conn, $_POST['dl_link']) : '';
+    $is_feat = isset($_POST['is_feat']) ? $_POST['is_feat'] : 'N/A';
+    $category = isset($_POST['category']) ? $_POST['category'] : 'Games';
 
- // Handle image uploads
-$uploadDir = "../images/"; // Directory to store uploaded images
+    // Handle image uploads
+    $uploadDir = "../images/"; // Directory to store uploaded images
 
-// Upload Icon Image
-$icon = $uploadDir . basename($_FILES["icon"]["name"]);
-move_uploaded_file($_FILES["icon"]["tmp_name"], $icon);
+    // Upload Icon Image
+    $icon = '';
+    if (isset($_FILES["icon"]["name"])) {
+        $icon = $uploadDir . basename($_FILES["icon"]["name"]);
+        move_uploaded_file($_FILES["icon"]["tmp_name"], $icon);
+    }
 
-// Upload Thumbnail Image
-$thumb = $uploadDir . basename($_FILES["thumb"]["name"]);
-move_uploaded_file($_FILES["thumb"]["tmp_name"], $thumb);
+    // Upload Thumbnail Image
+    $thumb = '';
+    if (isset($_FILES["thumb"]["name"])) {
+        $thumb = $uploadDir . basename($_FILES["thumb"]["name"]);
+        move_uploaded_file($_FILES["thumb"]["tmp_name"], $thumb);
+    }
 
-// Upload Detailed Images
-$det_img1 = $uploadDir . basename($_FILES["det_img1"]["name"]);
-move_uploaded_file($_FILES["det_img1"]["tmp_name"], $det_img1);
+    // Upload Detailed Images
+    $det_img1 = '';
+    if (isset($_FILES["det_img1"]["name"])) {
+        $det_img1 = $uploadDir . basename($_FILES["det_img1"]["name"]);
+        move_uploaded_file($_FILES["det_img1"]["tmp_name"], $det_img1);
+    }
 
-$det_img2 = $uploadDir . basename($_FILES["det_img2"]["name"]);
-move_uploaded_file($_FILES["det_img2"]["tmp_name"], $det_img2);
+    $det_img2 = '';
+    if (isset($_FILES["det_img2"]["name"])) {
+        $det_img2 = $uploadDir . basename($_FILES["det_img2"]["name"]);
+        move_uploaded_file($_FILES["det_img2"]["tmp_name"], $det_img2);
+    }
 
-$det_img3 = $uploadDir . basename($_FILES["det_img3"]["name"]);
-move_uploaded_file($_FILES["det_img3"]["tmp_name"], $det_img3);
+    $det_img3 = '';
+    if (isset($_FILES["det_img3"]["name"])) {
+        $det_img3 = $uploadDir . basename($_FILES["det_img3"]["name"]);
+        move_uploaded_file($_FILES["det_img3"]["tmp_name"], $det_img3);
+    }
 
-// Upload Featured Image
-$feat_img = $uploadDir . basename($_FILES["feat_img"]["name"]);
-move_uploaded_file($_FILES["feat_img"]["tmp_name"], $feat_img);
+    // Upload Featured Image
+    $feat_img = '';
+    if (isset($_FILES["feat_img"]["name"])) {
+        $feat_img = $uploadDir . basename($_FILES["feat_img"]["name"]);
+        move_uploaded_file($_FILES["feat_img"]["tmp_name"], $feat_img);
+    }
 
+    // Prepare the SQL statement for insertion
+    $sql = "INSERT INTO products (name, description, price, dl_link, icon, thumb, det_img1, det_img2, det_img3, feat_img, is_feat, category)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-            // Perform SQL query to insert the data into the 'products' table
-            $sql = "INSERT INTO products (name, description, price, dl_link, icon, thumb, det_img1, det_img2, det_img3, feat_img, is_feat, category)
-                    VALUES ('$name', '$description', $price, '$dl_link', '$icon', '$thumb', '$det_img1', '$det_img2', '$det_img3', '$feat_img', '$is_feat', '$category')";
+    // Prepare the statement
+    $stmt = mysqli_prepare($conn, $sql);
 
-            if (mysqli_query($conn, $sql)) {
-                // Product added successfully
-                echo '<div class="alert alert-success">Product added successfully!</div>';
-            } else {
-                echo '<div class="alert alert-danger">Error: ' . mysqli_error($conn) . '</div>';
-            }
+    if ($stmt) {
+        // Bind parameters
+        mysqli_stmt_bind_param($stmt, "ssdsssssssss", $name, $description, $price, $dl_link, $icon, $thumb, $det_img1, $det_img2, $det_img3, $feat_img, $is_feat, $category);
 
-            // Close the database connection
-            mysqli_close($conn);
+        // Execute the statement
+        if (mysqli_stmt_execute($stmt)) {
+            // Product added successfully
+            echo '<div class="alert alert-success">Product added successfully!</div>';
+        } else {
+            echo '<div class="alert alert-danger">Error: ' . mysqli_stmt_error($stmt) . '</div>';
         }
-        ?>
+
+        // Close the statement
+        mysqli_stmt_close($stmt);
+    } else {
+        echo '<div class="alert alert-danger">Error preparing SQL statement.</div>';
+    }
+}
+
+// Close the database connection
+mysqli_close($conn);
+?>
+
+
 
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST" enctype="multipart/form-data">
             
