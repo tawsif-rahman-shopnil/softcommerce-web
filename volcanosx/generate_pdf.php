@@ -47,7 +47,9 @@ if (isset($_POST['downloadPdfButton'])) {
     $pdf->AddPage();
 
     // Define the HTML content to be added to the PDF
-    $html = '<h1>Sales Report</h1>';
+    $html = '<h1 style="text-align: center; font-weight: bold;"><b>Armarra</b></h1>';
+    $html .= '<p style="text-align: center;">Email: admin@armarra.com</p>';
+    $html .= '<h2 style="text-align: center;"><i>Sales Report</i></h2>';
     $html .= '<table>';
     $html .= '<thead>';
     $html .= '<tr>';

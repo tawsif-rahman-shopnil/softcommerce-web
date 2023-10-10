@@ -211,10 +211,9 @@
                             'Nevaeh Jones',
                             'Samantha Adams',
                             'Madeline Shin',
-                            'Noah King',
                             'Leilani Chow',
                         ];
-
+                        
                         $customerEmails = [];
                         $domains = ['gmail.com', 'outlook.com', 'icloud.com']; // Add more domains as needed
                         

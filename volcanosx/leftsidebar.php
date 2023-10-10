@@ -17,7 +17,7 @@
 
                         <li class="dropdown notification-list topbar-dropdown">
                             <a class="nav-link dropdown-toggle nav-user me-0 waves-effect waves-light" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                                <img src="assets/images/users/user-1.jpg" alt="user-image" class="rounded-circle">
+                                <img src="assets/images/user.png" alt="user-image" class="rounded-circle">
                                 <span class="pro-user-name ms-1">
                                     Admin <i class="mdi mdi-chevron-down"></i> 
                                 </span>
@@ -83,7 +83,7 @@
                      <!-- User box -->
                     <div class="user-box text-center">
 
-                        <img src="assets/images/users/user-1.jpg" alt="user-img" title="Mat Helme" class="rounded-circle img-thumbnail avatar-md">
+                        <img src="assets/images/user.png" alt="user-img" title="Mat Helme" class="rounded-circle img-thumbnail avatar-md">
                             <div class="dropdown">
                                 <a href="#" class="user-name dropdown-toggle h5 mt-2 mb-1 d-block" data-bs-toggle="dropdown"  aria-expanded="false">Admin Management</a>
                                 <div class="dropdown-menu user-pro-dropdown">
