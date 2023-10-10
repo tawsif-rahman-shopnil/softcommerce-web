@@ -460,7 +460,7 @@ $pdf->AddPage();
 
 
 // Add the logo
-$pdf->Image('assets/images/logo.png', 10, 10, 65, 10);
+$pdf->Image('assets/images/logo.png', 10, 10, 60, 10);
 
 // Add email address
 $pdf->SetFont('helvetica', '', 12);
