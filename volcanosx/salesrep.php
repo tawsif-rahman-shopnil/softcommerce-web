@@ -10,12 +10,16 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <!-- App favicon -->
         <link rel="shortcut icon" href="assets/images/favicon.ico">
+        <link rel="apple-touch-icon" sizes="180x180" href="assets/images/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon-16x16.png">
+        <link rel="manifest" href="assets/images/site.webmanifest">
 
         <!-- Include jsPDF library -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
 
-<!-- Include autoTable plugin for jsPDF -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.17/jspdf.plugin.autotable.min.js"></script>
+        <!-- Include autoTable plugin for jsPDF -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.17/jspdf.plugin.autotable.min.js"></script>
 
 
         <!-- App css -->

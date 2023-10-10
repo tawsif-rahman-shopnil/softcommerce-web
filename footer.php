@@ -2,7 +2,7 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-12">
-          <p>© Copyright Reserved by <a href="#">Crednik</a>
+          <p>© Copyright Reserved by <a href="http://swinroll.com">Swinroll Tech</a>
 
         </div>
       </div>
