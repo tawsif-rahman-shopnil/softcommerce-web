@@ -17,6 +17,19 @@ function getRandomPaymentStatus()
     $statuses = ['Paid', 'Pending', 'Processing'];
     return $statuses[array_rand($statuses)];
 }
+function getRandomTRXID()
+{
+    // Generate a random TRXID using a combination of letters and numbers
+    $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    $trxid = '';
+    $length = 8; // You can adjust the length as needed
+
+    for ($i = 0; $i < $length; $i++) {
+        $trxid .= $characters[rand(0, strlen($characters) - 1)];
+    }
+
+    return $trxid;
+}
 
 // Check if the "Download PDF" button was clicked
 if (isset($_POST['downloadPdfButton'])) {
@@ -38,6 +51,7 @@ if (isset($_POST['downloadPdfButton'])) {
     $html .= '<table>';
     $html .= '<thead>';
     $html .= '<tr>';
+    $html .= '<th>TrxID</th>';
     $html .= '<th>Customer Name</th>';
     $html .= '<th>Customer Email</th>';
     $html .= '<th>Customer Last Order Date</th>';
@@ -170,7 +184,7 @@ if (isset($_POST['downloadPdfButton'])) {
     
 
     for ($i = 0; $i < count($customerNames); $i++) {
-        // Generate other customer data here...
+        $trxid = getRandomTRXID();
         $customerName = $customerNames[$i];
         $customerEmail = $customerEmails[$i];
         $customerLastOrderDate = getRandomDate();
@@ -181,6 +195,7 @@ if (isset($_POST['downloadPdfButton'])) {
 
         // Append customer data to the HTML content
         $html .= '<tr>';
+        $html .= '<td>' . $trxid . '</td>';
         $html .= '<td>' . $customerName . '</td>';
         $html .= '<td>' . $customerEmail . '</td>';
         $html .= '<td>' . $customerLastOrderDate. '</td>';

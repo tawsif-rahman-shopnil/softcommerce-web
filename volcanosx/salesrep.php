@@ -64,6 +64,7 @@
                 <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap">
                     <thead>
                         <tr>
+                            <th>TrxID</th>
                             <th>Customer Name</th>
                             <th>Customer Email</th>
                             <th>Customer Last Order Date</th>
@@ -88,6 +89,19 @@
                         {
                             $statuses = ['Paid', 'Pending', 'Processing'];
                             return $statuses[array_rand($statuses)];
+                        }
+                        function getRandomTRXID()
+                        {
+                            // Generate a random TRXID using a combination of letters and numbers
+                            $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+                            $trxid = '';
+                            $length = 8; // You can adjust the length as needed
+
+                            for ($i = 0; $i < $length; $i++) {
+                                $trxid .= $characters[rand(0, strlen($characters) - 1)];
+                            }
+
+                            return $trxid;
                         }
 
                         $customerNames = [
@@ -212,6 +226,7 @@
 
                         for ($i = 0; $i < count($customerNames); $i++) {
                             echo '<tr>';
+                            $trxid = getRandomTRXID();
                             $customerName = $customerNames[$i];
                             $customerEmail = $customerEmails[$i];
                             $customerLastOrderDate = getRandomDate();
@@ -220,6 +235,7 @@
                             $customerTotalSpent = '$' . rand(100, 1000); // Add the dollar sign here
                             $paymentStatus = getRandomPaymentStatus();
 
+                            echo '<td>' . $trxid . '</td>'; // Display the TRXID in the table
                             echo '<td>' . $customerName . '</td>';
                             echo '<td>' . $customerEmail . '</td>';
                             echo '<td>' . $customerLastOrderDate . '</td>';
