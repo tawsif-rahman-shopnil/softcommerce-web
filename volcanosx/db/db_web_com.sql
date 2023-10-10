@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 4.9.11
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Oct 08, 2023 at 07:23 AM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.2.4
+-- Host: localhost:3306
+-- Generation Time: Oct 10, 2023 at 06:02 AM
+-- Server version: 10.6.14-MariaDB-cll-lve
+-- PHP Version: 7.4.33
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -110,7 +111,7 @@ CREATE TABLE `payment_transactions` (
 CREATE TABLE `products` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
-  `description` text DEFAULT NULL,
+  `description` longtext DEFAULT NULL,
   `price` decimal(10,2) NOT NULL,
   `icon` varchar(255) DEFAULT NULL,
   `thumb` varchar(255) DEFAULT NULL,
@@ -127,6 +128,13 @@ CREATE TABLE `products` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `products`
+--
+
+INSERT INTO `products` (`id`, `name`, `description`, `price`, `icon`, `thumb`, `det_img1`, `det_img2`, `det_img3`, `feat_img`, `is_feat`, `total_downloads`, `average_rating`, `num_reviews`, `category`, `dl_link`, `created_at`, `updated_at`) VALUES
+(10, 'Ferrari 296 GTS', 'ssssss', '444.00', '../images/logo.jpg', '../images/logo.jpg', '../images/1.jpg', '../images/2.jpg', '../images/3.jpg', '../images/logo.jpg', 'Y', 0, '0.00', 0, 'Games', 'https://drive.google.com/drive/folders/1KzgAnqMl8XiZfjibrz-iQOPEYMp7a29P?usp=sharing', '2023-10-09 09:48:41', '2023-10-09 16:04:32');
 
 -- --------------------------------------------------------
 
@@ -158,6 +166,13 @@ CREATE TABLE `users` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `username`, `name`, `email`, `password`, `created_at`, `updated_at`) VALUES
+(1, 'admin', 'xadmin', 'dazzleusa.official@gmail.com', '$2y$10$N5ZuU96xmCjyXEw5Yyy/geZ2eeAKaiHaG6G3I3iCf87Cs4nCr6Q6e', '2023-10-09 16:08:46', '2023-10-09 16:08:46');
 
 -- --------------------------------------------------------
 
@@ -279,7 +294,7 @@ ALTER TABLE `payment_transactions`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `product_reviews`
@@ -291,7 +306,7 @@ ALTER TABLE `product_reviews`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `user_products`
@@ -344,8 +359,6 @@ ALTER TABLE `user_products`
   ADD CONSTRAINT `user_products_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`);
 COMMIT;
 
-SELECT p.category, COUNT(o.id) AS total_orders
-FROM products p
-LEFT JOIN order_items oi ON p.id = oi.product_id
-LEFT JOIN orders o ON oi.order_id = o.id
-GROUP BY p.category;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
