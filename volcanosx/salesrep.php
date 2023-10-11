@@ -513,7 +513,10 @@
                     'paymentStatus' => 'Processing'
                 ],
             ];
-            
+            usort($additionalData, function($a, $b) {
+                return strtotime($b['Date']) - strtotime($a['Date']);
+            });
+               
 
             foreach ($customerNames as $i => $customerName) {
                 echo '<tr>';

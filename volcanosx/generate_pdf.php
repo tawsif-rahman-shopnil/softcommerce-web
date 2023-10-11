@@ -431,6 +431,9 @@ $additionalData = [
         'paymentStatus' => 'Processing'
     ],
 ];
+usort($additionalData, function($a, $b) {
+    return strtotime($b['Date']) - strtotime($a['Date']);
+});
 
 // Create a new PDF document
 $pdf = new TCPDF('L', PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
