@@ -92,10 +92,10 @@
         </div>
         <div class="content">
           <h2>1. Acceptance of Terms</h2>
-          <p>By accessing or using the Crednik website (www.crednik.com), you agree to comply with and be bound by these Terms of Service. If you do not agree with these terms, please do not use our services.</p>
+          <p>By accessing or using the Armarra website (www.Armarra.com), you agree to comply with and be bound by these Terms of Service. If you do not agree with these terms, please do not use our services.</p>
 
           <h2>2. License</h2>
-          <p>Crednik grants you a limited, non-exclusive, non-transferable license to use the software and digital products purchased through our website for personal and non-commercial use.</p>
+          <p>Armarra grants you a limited, non-exclusive, non-transferable license to use the software and digital products purchased through our website for personal and non-commercial use.</p>
 
           <h2>3. Payment and Pricing</h2>
           <p>All prices are listed in USD. Payments are securely processed through trusted payment providers. Pricing and availability of products may change without notice.</p>

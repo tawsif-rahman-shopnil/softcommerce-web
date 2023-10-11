@@ -101,7 +101,7 @@
                   </div>
                   <div class="content">
                     <p>For any inquiries, questions, or assistance, please contact our customer support team:</p>
-                    <p><strong>Email:</strong> support@crednik.com</p>
+                    <p><strong>Email:</strong> support@armarra.com</p>
                     <p><strong>Phone:</strong> [Insert Phone Number]</p>
                   </div>
                 </div>
