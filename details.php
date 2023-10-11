@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -74,152 +75,135 @@
       <div class="col-lg-12">
         <div class="page-content">
 
-          <!-- ***** Featured Start ***** -->
-          <div class="row">
+        <?php
+// Include your database connection
+include 'volcanosx/dbcon.php';
+
+// Check if the product name is provided in the URL
+if (isset($_GET['name'])) {
+    $product_name = $_GET['name'];
+    
+    // Query to retrieve product details based on the product name
+    $sql = "SELECT * FROM products WHERE name = '$product_name'";
+    $result = mysqli_query($conn, $sql);
+
+    if (mysqli_num_rows($result) > 0) {
+        $row = mysqli_fetch_assoc($result);
+        $thumb = str_replace('../', '', $row['thumb']);
+        $name = $row['name'];
+
+        // Close the PHP tag to insert HTML content
+        ?>
+        <!-- ***** Featured Start ***** -->
+        <div class="row">
             <div class="col-lg-12">
-              <div class="feature-banner header-text">
-                <div class="row">
-                  <div class="col-lg-4">
-                    <img src="assets/images/feature-left.jpg" alt="" style="border-radius: 23px;">
-                  </div>
-                  <div class="col-lg-8">
-                    <div class="thumb">
-                      <img src="assets/images/feature-right.jpg" alt="" style="border-radius: 23px;">
-                      <a href="https://www.youtube.com/watch?v=r1b03uKWk_M" target="_blank"><i class="fa fa-play"></i></a>
+                <div class="game-details">
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <img src="<?php echo $thumb; ?>" alt="" style="border-radius: 23px;">
+                        </div>
+                        <div class="col-lg-8">
+                            <div class="thumb">
+                                <h2><?php echo $name; ?></h2>
+                                <div class="col-lg-12">
+                                    <div class="main-border-button">
+                                        <a href="#">Download Now!</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                  </div>
                 </div>
-              </div>
             </div>
-          </div>
-          <!-- ***** Featured End ***** -->
+        </div>
+        <!-- ***** Featured End ***** -->
+
+        <?php
+        // Resume PHP for additional content if needed
+    } else {
+        echo "Product not found.";
+    }
+} else {
+    echo "Product name not provided.";
+}
+
+// Close the database connection
+mysqli_close($conn);
+?>
+
+</div>
 
           <!-- ***** Details Start ***** -->
           <div class="game-details">
             <div class="row">
               <div class="col-lg-12">
-                <h2>Fortnite Details</h2>
+                
               </div>
-              <div class="col-lg-12">
-                <div class="content">
-                  <div class="row">
-                    <div class="col-lg-6">
-                      <div class="left-info">
-                        <div class="left">
-                          <h4>Fortnite</h4>
-                          <span>Sandbox</span>
-                        </div>
-                        <ul>
-                          <li><i class="fa fa-star"></i> 4.8</li>
-                          <li><i class="fa fa-download"></i> 2.3M</li>
-                        </ul>
-                      </div>
-                    </div>
-                    <div class="col-lg-6">
-                      <div class="right-info">
-                        <ul>
-                          <li><i class="fa fa-star"></i> 4.8</li>
-                          <li><i class="fa fa-download"></i> 2.3M</li>
-                          <li><i class="fa fa-server"></i> 36GB</li>
-                          <li><i class="fa fa-gamepad"></i> Action</li>
-                        </ul>
-                      </div>
-                    </div>
-                    <div class="col-lg-4">
-                      <img src="assets/images/details-01.jpg" alt="" style="border-radius: 23px; margin-bottom: 30px;">
-                    </div>
-                    <div class="col-lg-4">
-                      <img src="assets/images/details-02.jpg" alt="" style="border-radius: 23px; margin-bottom: 30px;">
-                    </div>
-                    <div class="col-lg-4">
-                      <img src="assets/images/details-03.jpg" alt="" style="border-radius: 23px; margin-bottom: 30px;">
-                    </div>
-                    <div class="col-lg-12">
-                      <p>Cyborg Gaming is free HTML CSS website template provided by TemplateMo. This is Bootstrap v5.2.0 layout. You can make a <a href="https://paypal.me/templatemo" target="_blank">small contribution via PayPal</a> to info [at] templatemo.com and thank you for supporting. If you want to get the PSD source files, please contact us. Lorem ipsum dolor sit consectetur es dispic dipiscingei elit, sed doers eiusmod lisum hored tempor.</p>
-                    </div>
-                    <div class="col-lg-12">
-                      <div class="main-border-button">
-                        <a href="#">Download Fortnite Now!</a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <?php
+include 'volcanosx/dbcon.php';
+
+if (isset($_GET['name'])) {
+    $product_name = $_GET['name'];
+    $sql = "SELECT * FROM products WHERE name = '$product_name'";
+    $result = mysqli_query($conn, $sql);
+
+    if (mysqli_num_rows($result) > 0) {
+        $row = mysqli_fetch_assoc($result);
+        $average_rating = $row['average_rating'];
+        $total_downloads = $row['total_downloads'];
+        $category = $row['category'];
+        $description = $row['description'];
+        
+        // Retrieve image URLs from the database
+        $image1 = str_replace('../', '', $row['det_img1']);
+        $image2 = str_replace('../', '', $row['det_img2']);
+        $image3 = str_replace('../', '', $row['det_img3']);
+        // Now, populate the HTML with the retrieved data
+        echo '<div class="col-lg-12">';
+        echo '  <div class="content">';
+        echo '    <div class="row">';
+        echo '      <div class="col-lg-12">';
+        echo '        <div class="dets">';
+        echo '          <ul>';
+        echo '            <li><i class="fa fa-star"></i> ' . $average_rating . '</li>';
+        echo '            <li><i class="fa fa-download"></i> ' . $total_downloads . '</li>';
+        echo '            <li><i class="fas fa-layer-group"></i> ' . $category . '</li>';
+        echo '          </ul>';
+        echo '        </div>';
+        echo '      </div>';
+        echo '      <div class="col-lg-4">';
+        // Display the first image from the database
+        echo '        <img src="' . $image1 . '" alt="" style="border-radius: 23px; margin-bottom: 30px;">';
+        echo '      </div>';
+        echo '      <div class="col-lg-4">';
+        // Display the second image from the database
+        echo '        <img src="' . $image2 . '" alt="" style="border-radius: 23px; margin-bottom: 30px;">';
+        echo '      </div>';
+        echo '      <div class="col-lg-4">';
+        // Display the third image from the database
+        echo '        <img src="' . $image3 . '" alt="" style="border-radius: 23px; margin-bottom: 30px;">';
+        echo '      </div>';
+        echo '      <div class="col-lg-12">';
+        echo '        <p>';
+        echo '          ' . $description;
+        echo '        </p>';
+        echo '      </div>';
+        echo '    </div>';
+        echo '  </div>';
+        echo '</div>';
+    } else {
+        echo "Product not found.";
+    }
+} else {
+    echo "Product name not provided.";
+}
+
+mysqli_close($conn);
+?>
+
             </div>
           </div>
           <!-- ***** Details End ***** -->
-
-          <!-- ***** Other Start ***** -->
-          <div class="other-games">
-            <div class="row">
-              <div class="col-lg-12">
-                <div class="heading-section">
-                  <h4><em>Other Related</em> Games</h4>
-                </div>
-              </div>
-              <div class="col-lg-6">
-                <div class="item">
-                  <img src="assets/images/game-01.jpg" alt="" class="templatemo-item">
-                  <h4>Dota 2</h4><span>Sandbox</span>
-                  <ul>
-                    <li><i class="fa fa-star"></i> 4.8</li>
-                    <li><i class="fa fa-download"></i> 2.3M</li>
-                  </ul>
-                </div>
-              </div>
-              <div class="col-lg-6">
-                <div class="item">
-                  <img src="assets/images/game-02.jpg" alt="" class="templatemo-item">
-                  <h4>Dota 2</h4><span>Sandbox</span>
-                  <ul>
-                    <li><i class="fa fa-star"></i> 4.8</li>
-                    <li><i class="fa fa-download"></i> 2.3M</li>
-                  </ul>
-                </div>
-              </div>
-              <div class="col-lg-6">
-                <div class="item">
-                  <img src="assets/images/game-03.jpg" alt="" class="templatemo-item">
-                  <h4>Dota 2</h4><span>Sandbox</span>
-                  <ul>
-                    <li><i class="fa fa-star"></i> 4.8</li>
-                    <li><i class="fa fa-download"></i> 2.3M</li>
-                  </ul>
-                </div>
-              </div>
-              <div class="col-lg-6">
-                <div class="item">
-                  <img src="assets/images/game-02.jpg" alt="" class="templatemo-item">
-                  <h4>Dota 2</h4><span>Sandbox</span>
-                  <ul>
-                    <li><i class="fa fa-star"></i> 4.8</li>
-                    <li><i class="fa fa-download"></i> 2.3M</li>
-                  </ul>
-                </div>
-              </div>
-              <div class="col-lg-6">
-                <div class="item">
-                  <img src="assets/images/game-03.jpg" alt="" class="templatemo-item">
-                  <h4>Dota 2</h4><span>Sandbox</span>
-                  <ul>
-                    <li><i class="fa fa-star"></i> 4.8</li>
-                    <li><i class="fa fa-download"></i> 2.3M</li>
-                  </ul>
-                </div>
-              </div>
-              <div class="col-lg-6">
-                <div class="item">
-                  <img src="assets/images/game-01.jpg" alt="" class="templatemo-item">
-                  <h4>Dota 2</h4><span>Sandbox</span>
-                  <ul>
-                    <li><i class="fa fa-star"></i> 4.8</li>
-                    <li><i class="fa fa-download"></i> 2.3M</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- ***** Other End ***** -->
 
         </div>
       </div>

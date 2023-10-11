@@ -1431,33 +1431,40 @@ Game Details Style
   color: #ec6090;
 }
 
-.game-details .content .right-info {
+.game-details .content .dets {
   background-color: #27292a;
   border-radius: 23px;
   padding: 30px;
   margin-bottom: 30px;
 }
 
-.game-details .content .right-info ul li {
+.game-details .content .dets ul {
+  text-align: center; /* Center align the content within the ul */
+  padding: 0; /* Remove default padding */
+  list-style: none; /* Remove default list styles */
+}
+
+.game-details .content .dets ul li {
   display: inline-block;
   width: 23%;
-  text-align: center;
+  text-align: center; /* Center align the content within li elements */
   font-size: 14px;
   color: #fff;
 }
 
-.game-details .content .right-info ul li i {
+.game-details .content .dets ul li i {
   display: block;
   margin-bottom: 12px;
 }
 
-.game-details .content .right-info ul li:first-child i {
+.game-details .content .dets ul li:first-child i {
   color: yellow;
 } 
 
-.game-details .content .right-info ul li i {
+.game-details .content .dets ul li i {
   color: #ec6090;
 }
+
 
 .game-details .main-border-button {
   margin-top: 35px;
@@ -1808,4 +1815,14 @@ body {
   .gaming-library .item ul li {
     width: 16%;
   }
+}
+
+.scrollable-list {
+  height: 430px; /* Adjust the height as needed */
+  overflow-y: auto;
+}
+
+.scrollable-list li {
+  padding: 10px; /* Add some padding to each list item for spacing */
+  /* Your existing styles for list items go here */
 }

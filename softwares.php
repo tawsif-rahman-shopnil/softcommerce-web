@@ -8,7 +8,7 @@
 
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-    <title> Armarra | Softwares </title>
+    <title> Armarra | Software </title>
 
     <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -51,8 +51,8 @@
                     <!-- ***** Menu Start ***** -->
                     <ul class="nav">
                         <li><a href="index.php">Home</a></li>
-                        <li><a href="games.php" class="active">Games</a></li>
-                        <li><a href="softwares.php">Softwares</a></li>
+                        <li><a href="games.php">Games</a></li>
+                        <li><a href="softwares.php" class="active">Softwares</a></li>
                         <li><a href="about.php">About</a></li>
                         <li><a href="contact.php">Contact</a></li>
                         <div class="main-button">
@@ -80,20 +80,50 @@
             <div class="col-lg-8">
               <div class="featured-games header-text">
                 <div class="heading-section">
-                  <h4><em>Featured</em> Softwares </h4>
+                  <h4><em>Featured</em> Softwares</h4>
                 </div>
                 <div class="owl-features owl-carousel">
-                  <div class="item">
-                    <div class="thumb">
-                      <img src="assets/images/featured-01.jpg" alt="">
-                    </div>
-                    <h4>CS-GO<br><span>249K Downloads</span></h4>
-                    <ul>
-                      <li><i class="fa fa-star"></i> 4.8</li>
-                      <li><i class="fa fa-download"></i> 2.3M</li>
-                    </ul>
-                  </div>
-                  
+                <?php
+// Include your database connection
+include 'volcanosx/dbcon.php';
+
+// Query to retrieve the featured games from the database
+$sql = "SELECT p.name, p.feat_img, pr.rating, p.total_downloads, oi.quantity
+        FROM products p
+        LEFT JOIN product_reviews pr ON p.id = pr.product_id
+        LEFT JOIN order_items oi ON p.id = oi.product_id
+        WHERE p.is_feat = 'Y' AND p.category = 'Softwares'";
+
+$result = mysqli_query($conn, $sql);
+
+if (mysqli_num_rows($result) > 0) {
+    while ($row = mysqli_fetch_assoc($result)) {
+        $thumb = str_replace('../', '', $row['feat_img']);
+        $productName = $row['name'];
+        $downloads = number_format($row['total_downloads']);
+
+        echo '
+        <div class="item">
+            <div class="thumb">
+                <a href="details.php?name=' . urlencode($productName) . '">
+                    <img src="' . $thumb . '" alt="">
+                </a>
+            </div>
+            <h4>' . $productName . '<br><span>' . $downloads . ' Downloads</span></h4>
+            <ul>
+                <li><i class="fa fa-star"></i> ' . $row['rating'] . '</li>
+                <li><i class="fa fa-download"></i> ' . $row['quantity'] . '</li>
+            </ul>
+        </div>';
+    }
+} else {
+    echo "No featured softwares found.";
+}
+
+// Close the database connection
+mysqli_close($conn);
+?>
+
                 </div>
               </div>
             </div>
@@ -102,8 +132,8 @@
                 <div class="heading-section">
                   <h4><em>Top</em> Downloaded</h4>
                 </div>
-                <ul>
-<?php
+                <ul class="scrollable-list">
+                <?php
 // Include your database connection
 include 'volcanosx/dbcon.php';
 
@@ -111,29 +141,34 @@ include 'volcanosx/dbcon.php';
 $sql = "SELECT p.id, p.name, p.category, p.thumb, pr.rating, oi.quantity
         FROM products p
         LEFT JOIN product_reviews pr ON p.id = pr.product_id
-        LEFT JOIN order_items oi ON p.id = oi.product_id";
+        LEFT JOIN order_items oi ON p.id = oi.product_id
+        WHERE p.category = 'Softwares'";
 
 $result = mysqli_query($conn, $sql);
 
 if (mysqli_num_rows($result) > 0) {
     while ($row = mysqli_fetch_assoc($result)) {
         $categoryIcon = '';
-        if ($row['category'] === 'Games') {
+        if ($row['category'] === 'Softwares') {
             $categoryIcon = '<i class="fa fa-gamepad"></i>';
         } elseif ($row['category'] === 'Software') {
             $categoryIcon = '<i class="fa fa-cogs"></i>';
         }
         $thumb = str_replace('../', '', $row['thumb']);
+        $productName = urlencode($row['name']); // Encode the product name for the URL
+
         echo '
         <li>
-          <img src="' . $thumb . '" alt="" class="templatemo-item">
-          <h4>' . $row['name'] . '</h4>
-          <h6>' . $categoryIcon . ' ' . $row['category'] . '</h6>
-          <span><i class="fa fa-star" style="color: yellow;"></i> ' . $row['rating'] . '</span>
-          <span><i class="fa fa-download" style="color: #ec6090;"></i> ' . $row['quantity'] . '</span>
-          <div class="download">
-            <a href="custauth.php"><i class="fa fa-download"></i></a>
-          </div>
+          <a href="details.php?name=' . $productName . '">
+            <img src="' . $thumb . '" alt="" class="templatemo-item">
+            <h4>' . $row['name'] . '</h4>
+            <h6>' . $categoryIcon . ' ' . $row['category'] . '</h6>
+            <span><i class="fa fa-star" style="color: yellow;"></i> ' . $row['rating'] . '</span>
+            <span><i class="fa fa-download" style="color: #ec6090;"></i> ' . $row['quantity'] . '</span>
+            <div class="download">
+              <a href="custauth.php"><i class="fa fa-download"></i></a>
+            </div>
+          </a>
         </li>';
     }
 } else {
@@ -143,6 +178,7 @@ if (mysqli_num_rows($result) > 0) {
 // Close the database connection
 mysqli_close($conn);
 ?>
+
 </ul>
 
               </div>
@@ -157,15 +193,16 @@ mysqli_close($conn);
                       <h4>Our Library</h4>
                     </div>
                     <div class="row">
-<?php
+                    <?php
 // Include your database connection
 include 'volcanosx/dbcon.php';
 
-// Query to retrieve the required data from the database
-$sql = "SELECT p.thumb, p.name, pr.rating, oi.quantity
+// Query to retrieve the featured games from the database, filtered by category
+$sql = "SELECT p.id, p.thumb, p.name, pr.rating, oi.quantity
         FROM products p
         LEFT JOIN product_reviews pr ON p.id = pr.product_id
-        LEFT JOIN order_items oi ON p.id = oi.product_id";
+        LEFT JOIN order_items oi ON p.id = oi.product_id
+        WHERE p.is_feat = 'Y' AND p.category = 'Softwares'"; // Added the category filter
 
 $result = mysqli_query($conn, $sql);
 
@@ -173,13 +210,16 @@ if (mysqli_num_rows($result) > 0) {
     while ($row = mysqli_fetch_assoc($result)) {
         // Remove the '../' part from the 'thumb' field
         $thumb = str_replace('../', '', $row['thumb']);
-        
+
+        // Create a clickable link that passes the product's name as a parameter to details.php
         echo '
         <div class="col-lg-3 col-sm-6">
-          <div class="item">
-            <img src="' . $thumb . '" alt="">
-            <h4>' . $row['name'] . '</h4>
-          </div>
+          <a href="details.php?name=' . urlencode($row['name']) . '">
+            <div class="item">
+              <img src="' . $thumb . '" alt="">
+              <h4>' . $row['name'] . '</h4>
+            </div>
+          </a>
         </div>';
     }
 } else {
@@ -189,6 +229,8 @@ if (mysqli_num_rows($result) > 0) {
 // Close the database connection
 mysqli_close($conn);
 ?>
+
+
 </div>
 
                 <!-- ***** Live Stream End ***** -->
