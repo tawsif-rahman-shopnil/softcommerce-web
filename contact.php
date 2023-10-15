@@ -1,117 +1,36 @@
-<!DOCTYPE html>
-<html lang="en">
+<?php
+$page = 'contact'; // Set the active page
+echo "Current page: $page"; // Debugging line
+include 'header.php';
+?>
 
-<head>
-
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-
-  <title> Armarra | Contact Us </title>
-
-  <!-- Bootstrap core CSS -->
-  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="shortcut icon" href="assets/images/favicon.ico">
-        <link rel="apple-touch-icon" sizes="180x180" href="assets/images/apple-touch-icon.png">
-        <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon-16x16.png">
-        <link rel="manifest" href="assets/images/site.webmanifest">
-
-  <!-- Additional CSS Files -->
-  <link rel="stylesheet" href="assets/css/fontawesome.css">
-  <link rel="stylesheet" href="assets/css/templatemo-cyborg-gaming.css">
-  <link rel="stylesheet" href="assets/css/owl.css">
-  <link rel="stylesheet" href="assets/css/animate.css">
-  <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
-  <style>
-    .about-us ul li {
-      color: #A0A0A0;
-    }
-
-    /* Center-align the Contact Us section */
-    .contact-us {
-      text-align: center;
-    }
-
-    .contact-us .section-heading {
-      margin-bottom: 30px;
-    }
-
-    .contact-us .content {
-      margin: 0 auto;
-      max-width: 600px;
-    }
-  </style>
-
-</head>
-
-<body>
-
-  <!-- ***** Header Area Start ***** -->
-  <header class="header-area header-sticky">
+<div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="page-content">
+<!-- ***** Contact Us Section Start ***** -->
+<section class="contact-us">
     <div class="container">
-      <div class="row">
-        <div class="col-12">
-          <nav class="main-nav">
-            <!-- ***** Logo Start ***** -->
-            <a href="index.php" class="logo">
-              <img src="assets/images/logo.png " alt="">
-            </a>
-            <!-- ***** Logo End ***** -->
-            <!-- ***** Search End ***** -->
-            <div class="search-input">
-              <form id="search" action="#">
-                <input type="text" placeholder="Type Something" id='searchText' name="searchKeyword" onkeypress="handle" />
-                <i class="fa fa-search"></i>
-              </form>
-            </div>
-            <!-- ***** Search End ***** -->
-            <!-- ***** Menu Start ***** -->
-            <ul class="nav">
-              <li><a href="index.php">Home</a></li>
-              <li><a href="games.php">Games</a></li>
-              <li><a href="softwares.php">Softwares</a></li>
-              <li><a href="about.php">About</a></li>
-              <li><a href="contact.php" class="active">Contact</a></li>
-              <div class="main-button">
-                <a href="custauth.php">Login/Sign-up</a>
-              </div>
-            </ul>
-            <a class='menu-trigger'>
-              <span>Menu</span>
-            </a>
-            <!-- ***** Menu End ***** -->
-          </nav>
-        </div>
-      </div>
-    </div>
-  </header>
-  <!-- ***** Header Area End ***** -->
- 
-          <!-- ***** Contact Us Section Start ***** -->
-          <section class="contact-us">
-            <div class="container">
-              <div class="row">
-                <div class="col-lg-12">
-                  <div class="section-heading">
-                    <h2>Contact Us</h2>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="section-heading">
+                    <h2>Contact ARMARRA</h2>
                     <div class="line"></div>
-                  </div>
-                  <div class="content">
-                    <p>For any inquiries, questions, or assistance, please contact our customer support team:</p>
-                    <p><strong>Email:</strong> support@armarra.com</p>
-                    <p><strong>Phone:</strong> [Insert Phone Number]</p>
-                  </div>
                 </div>
-              </div>
+                <div class="content">
+                    <p>At ARMARRA, we're committed to providing top-notch customer support and assisting you with any questions or concerns you may have. Here's how you can get in touch with us:</p>
+                    <p><strong>Customer Service Hours:</strong> Our dedicated Customer Service team is available to assist you from Monday to Friday, between 9:00 am and 5:00 pm (EST). We aim to respond to all inquiries promptly during these hours.</p>
+                    <p><strong>Email:</strong> For any inquiries, feel free to reach out to us at support@armarra.com. Whether you have questions about our products, need order assistance, or require additional information, our team is here to help. Expect timely and informative responses to all your emails.</p>
+                    <p><strong>Phone:</strong> You can also contact us by phone at +86 132 8211 2751 & +86 195 6434 7169. Our knowledgeable Customer Service representatives will be happy to assist you over the phone. Please note that phone support is available during our regular business hours.</p>
+                    <p><strong>Our Office Address:</strong> Room 1006, 10 / F, Yuedu Commercial Building, 632 Zhongshan North Road, Gongshu District Hangzhou, China</p>
+                    <p><strong>We Value Your Feedback:</strong> We greatly value your feedback, as it helps us improve our products and services to meet your needs and exceed your expectations. Whether you have suggestions, comments, or concerns, we'd love to hear from you. Your feedback is essential in our quest to provide the best possible experience.</p>
+                    <p>Thank you for choosing ARMARRA. We look forward to assisting you and delivering exceptional service throughout your digital shopping journey.</p>
+                </div>
             </div>
-          </section>
-          <!-- ***** Contact Us Section End ***** -->
         </div>
-      </div>
     </div>
-  </div>
+</section>
+<!-- ***** Contact Us Section End ***** -->
+</div></br>
 
   <?php require 'footer.php'; ?>
